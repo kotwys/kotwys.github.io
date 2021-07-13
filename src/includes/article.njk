@@ -21,10 +21,12 @@ eleventyComputed:
   <article class="prose" itemscope itemtype="https://schema.org/Article">
     <header class="front">
       <h1 class="front__title" itemprop="headline name">{{ title }}</h1>
-      <div class="minor dot-sep">
+      <div class="minor">
         <time datetime="{{ date | isoDate }}" itemprop="datePublished">{{ date | udmDate }}</time>
+        <span aria-hidden="true"> ⋅ </span>
         <span>{{ content | readTime }}</span>
         {% for lang in otherlangs %}
+        <span aria-hidden="true"> ⋅ </span>
         <a rel="alternate"
           href="{{ page.url }}{{ lang }}.html"
           hreflang="{{ lang }}"
