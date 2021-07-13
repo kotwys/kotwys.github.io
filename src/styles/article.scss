@@ -48,12 +48,9 @@ figcaption {
 }
 
 [data-word] {
-  @include reset.button;
-
-  position: relative;
   background: var(--elevation);
   border: 1px solid gray;
-  padding-inline: 0.25em;
+  padding: 0.25em;
   border-radius: 0.25em;
   cursor: pointer;
 

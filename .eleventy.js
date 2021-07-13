@@ -58,7 +58,7 @@ module.exports = (config) => {
   );
 
   config.addShortcode('word', (hash, declension) =>
-    `<button data-word="${hash}">${declension}</button>`
+    `<span role="term" tabindex="0" data-word="${hash}">${declension}</span>`
   );
 
   config.addShortcode('rdfmeta', function (data) {
@@ -70,13 +70,6 @@ module.exports = (config) => {
       })
       .join('\n');
   });
-
-  config.addFilter('removeWords', content =>
-    content.replace(
-      /<button.*?data-word.*?>(.*?)<\/button>/g,
-      '$1'
-    )
-  );
 
   config.addFilter('relative', relative);
 

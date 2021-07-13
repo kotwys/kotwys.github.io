@@ -52,6 +52,12 @@ const closeCases = merge([
       fromEvents(el, 'mouseenter', () => 'enter'),
       fromEvents(el, 'mouseleave', () => 'leave'),
       fromEvents(el, 'click', () => 'toggle'),
+      fromEvents(el, 'keydown')
+        .filter((e: KeyboardEvent) => ['Enter', ' '].includes(e.key))
+        .map((e: KeyboardEvent) => {
+          e.preventDefault();
+          return 'toggle';
+        }),
       closeCases,
     ]).scan(machine, 'closed')
       .skipDuplicates()

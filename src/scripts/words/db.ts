@@ -9,7 +9,6 @@ export type Word = {
   hash: string,
   word: string,
   def: string,
-  learned?: boolean,
 };
 
 class Wordbase extends Dexie {
