@@ -1,0 +1,26 @@
+@use 'theme' as t;
+
+.footer {
+  padding-bottom: 40px;
+  background: {
+    color: var(--elevation);
+    image: url('/assets/ribbon.svg');
+    repeat: no-repeat;
+    position: 75% bottom;
+  }
+}
+
+.footer__content {
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 400px) {
+  .footer__content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.footsec__title {
+  @include t.text(base);
+}

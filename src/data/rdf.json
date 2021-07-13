@@ -1,0 +1,15 @@
+{
+  "og": {
+    "type": "website",
+    "locale": "udm_RU",
+    "site_name": "Коӵышгу",
+    "image": "/assets/logo.png"
+  },
+  "twitter": {
+    "card": "summary",
+    "creator": "@kotwys"
+  },
+  "telegram": {
+    "channel": "@ktwsgu"
+  }
+}

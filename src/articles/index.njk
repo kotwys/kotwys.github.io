@@ -1,0 +1,13 @@
+---
+title: Блог
+layout: page.njk
+---
+
+<main class="container">
+  <h1 class="section__heading">Блог</h1>
+  <ul class="all-articles">
+    {% for article in collections.articles %}
+      {% include 'article-preview.njk' %}
+    {% endfor %}
+  </ul>
+</main>

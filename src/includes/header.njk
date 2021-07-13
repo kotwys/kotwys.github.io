@@ -1,0 +1,17 @@
+<header class="header">
+  <a class="logo"
+    href="{{ '/' | url }}"
+    aria-label="Дорбаме"
+    {% if page.url == '/' %} aria-current="page" {% endif %}
+    >
+    {% include '../assets/logo-fill.svg' %}
+  </a>
+  <nav class="menu">
+    {% include 'menu.njk' %}
+  </nav>
+  <button class="theme-switch needs-js header__item rounded"
+    title="Пеймыт тэмаез пуктоно"
+    >
+    <i data-feather="moon"></i>
+  </button>
+</header>

@@ -1,0 +1,45 @@
+---
+layout: page.njk
+rdf:
+  og:
+    type: article
+  twitter:
+    card: summary_large_image
+eleventyComputed:
+  rdf:
+    article:
+      published_time: "{{ date | isoDate }}"
+    og:
+      description: "{{ abstract }}"
+      image: "{{ cover.url }}"
+      image:alt: "{{ cover.alt }}"
+---
+
+<main class="container"
+  {% if lang != 'udm' %} lang="{{ lang }}" {% endif %}
+  >
+  <article class="prose" itemscope itemtype="https://schema.org/Article">
+    <header class="front">
+      <h1 class="front__title" itemprop="headline name">{{ title }}</h1>
+      <div class="minor dot-sep">
+        <time datetime="{{ date | isoDate }}" itemprop="datePublished">{{ date | udmDate }}</time>
+        <span>{{ content | readTime }}</span>
+        {% for lang in otherlangs %}
+        <a rel="alternate"
+          href="{{ page.url }}{{ lang }}.html"
+          hreflang="{{ lang }}"
+          >
+          {{ lang | langname }}
+        </a>
+        {% endfor %}
+      </div>
+    </header>
+    {% if abstract %}
+    <p class="highlight" itemprop="abstract">{{ abstract }}</p>
+    {% endif %}
+    {% if cover %}
+    {% image cover.url, cover.alt, cover.caption %}
+    {% endif %}
+    {{ content | safe }}
+  </article>
+</main>

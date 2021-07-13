@@ -1,0 +1,33 @@
+---
+eleventyComputed:
+  rdf:
+    og:
+      title: "{{ title }}"
+---
+<!DOCTYPE html>
+<html lang="udm">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  {% rdfmeta rdf %}
+  <link rel="alternate"
+    href="{{ '/feed.xml' | url }}"
+    type="application/atom+xml"
+    title="Коӵыш Микайло">
+  <link rel="icon" href="/favicon.png">
+  <link rel="stylesheet" href="{{ '/styles/main.css' | url }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+  {% include 'header.njk' %}
+  {{ content | safe }}
+  {% include 'footer.njk' %}
+  <script type="module" src="{{ '/scripts/index.js' | url }}"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>

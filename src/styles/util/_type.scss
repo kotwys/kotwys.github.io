@@ -1,0 +1,23 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+
+$factor: 1.414 !default;
+
+$sizes: (
+  sm: (-0.5),
+  base: (0),
+  lg: (0.5),
+  xl: (1),
+  2xl: (2, 1.2),
+);
+
+@mixin text($size) {
+  $pair: map.get($sizes, $size);
+  $power: list.nth($pair, 1);
+
+  font-size: 1rem * math.pow($factor, $power);
+  @if list.length($pair) > 1 {
+    line-height: list.nth($pair, 2);
+  }
+}

@@ -1,0 +1,35 @@
+---
+permalink: feed.xml
+title: Коӵыш Микайлолэн блогез
+lang: udm
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+  xml:base="{{ site.url }}"
+  xml:lang="{{ lang }}"
+  >
+  <title>{{ title }}</title>
+  <link href="/articles"/>
+  <link rel="self" href="/feed.xml" type="application/atom+xml"/>
+  <author>
+    <name>Коӵыш Микайло</name>
+  </author>
+  <updated>{{ site.buildDate | isoDate }}</updated>
+  <id>{{ site.url }}</id>
+  <icon>/assets/logo.png</icon>
+
+  {% for article in collections.articles %}
+  <entry xml:base="{{ site.url }}{{ article.url }}">
+    <title>{{ article.data.title }}</title>
+    <link href="./." type="text/html"/>
+    <id>{{ site.url }}{{ article.url }}</id>
+    <published>{{ article.data.date | isoDate }}</published>
+    {% if article.data.abstract %}
+    <summary>{{ article.data.abstract }}</summary>
+    {% endif %}
+    <content type="text/html">
+      &lt;div&gt;{{ article.templateContent | removeWords }}&lt;/div&gt;
+    </content>
+  </entry>
+  {% endfor %}
+</feed>

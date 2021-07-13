@@ -1,0 +1,36 @@
+---
+title: Коӵыш Микайлолэн вотэсгердэз
+layout: page.njk
+skipFooterLinks: true
+---
+
+<main class="container">
+  <section class="whoami">
+    <h1>Ӟечбур!<br>Мон Микайло 👋</h1>
+    <p>Вотэслэсьтӥсь, удмуртлыкез азинтӥсь но берыктӥсь.</p>
+    <h2>Герӟет</h2>
+    <ul class="social-links social-links--detailed">
+      {% for network, contact in site.contacts -%}
+      <li>
+        <a class="social-link" href="{{ contact.url }}">
+          <i aria-label="{{ network }}" data-feather="{{ contact.icon }}"></i>
+          <span>{{ contact.handle }}</span>
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  <section>
+    <h2>
+      Блог
+      {% if collections.articles.length > 6 -%}
+        <a class="minor" href="/articles">ваньмыз артӥкол</a>
+      {%- endif -%}
+    </h2>
+    <ul class="all-articles">
+      {% for article in collections.articles | limit(6) %}
+        {% include 'article-preview.njk' %}
+      {% endfor %}
+    </ul>
+  </section>
+</main>

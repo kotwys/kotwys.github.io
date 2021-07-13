@@ -1,0 +1,22 @@
+@mixin link {
+  &, &:link, &:hover, &:active, &:visited {
+    color: unset;
+    text-decoration: unset;
+  }
+}
+
+@mixin ul {
+  list-style: none;
+  padding: unset;
+  margin: unset;
+}
+
+@mixin button {
+  appearance: none;
+  font: unset;
+  color: unset;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}

@@ -1,0 +1,26 @@
+<footer class="footer">
+  <div class="footer__content container">
+    <section>
+      <p>{{ site.author }}, {{ site.buildDate.getFullYear() }}</p>
+      <p><a href="https://11ty.dev/">Eleventy:ен</a> ӝуатэмын</p>
+    </section>
+    <section>
+      <h2 class="section__heading footsec__title">Тэлеграм канал</h2>
+      <p>Та артӥколъёсты эскерон но тросгес — <a href="https://t.me/ktwsgu">Коӵышгу</a> каналам</p>
+    </section>
+    {% if not(skipFooterLinks) %}
+    <section>
+      <h2 class="section__heading footsec__title">Герӟет</h2>
+      <ul class="social-links">
+        {% for network, contact in site.contacts %}
+        <li>
+          <a class="social-link" href="{{ contact.url }}">
+            <i aria-label="{{ network }}" data-feather="{{ contact.icon }}"></i>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+  </div>
+</footer>
