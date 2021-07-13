@@ -9,7 +9,7 @@ then
 fi
 
 REPO=ssh://git@github.com/kotwys/kotwys.github.io.git
-commit=$(git rev-parse HEAD)
+commit=$(git rev-parse --short HEAD)
 
 yarn build
 cd ./build
