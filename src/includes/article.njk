@@ -3,8 +3,13 @@ layout: page.njk
 rdf:
   og:
     type: article
+  article:
+    author: Коӵыш Микайло
   twitter:
     card: summary_large_image
+  # https://gist.github.com/fishchev/ed2ca15d5ffd9594d41498a4bf9ba12e
+  tg:
+    site_verification: ""
 eleventyComputed:
   rdf:
     article:
@@ -14,11 +19,11 @@ eleventyComputed:
       image: "{{ cover.url }}"
       image:alt: "{{ cover.alt }}"
 ---
-
+<!-- Mimicking teletype.in -->
 <main class="container"
   {% if lang != 'udm' %} lang="{{ lang }}" {% endif %}
   >
-  <article class="prose" itemscope itemtype="https://schema.org/Article">
+  <div class="article prose" itemscope itemtype="https://schema.org/Article">
     <header class="front">
       <h1 class="front__title" itemprop="headline name">{{ title }}</h1>
       <div class="minor">
@@ -35,14 +40,16 @@ eleventyComputed:
         </a>
         {% endfor %}
       </div>
+      {% if abstract %}
+      <p class="highlight" itemprop="abstract">{{ abstract }}</p>
+      {% endif %}
     </header>
-    {% if abstract %}
-    <p class="highlight" itemprop="abstract">{{ abstract }}</p>
-    {% endif %}
-    {% if cover %}
-    {% image cover.url, cover.alt, cover.caption %}
-    {% endif %}
-    {{ content | safe }}
+    <article class="article__content">
+      {% if cover %}
+      {% image cover.url, cover.alt, cover.caption %}
+      {% endif %}
+      {{ content | safe }}
+    </article>
     <section id="comments">
       <h2>Валэктонъёс</h2>
       <script async src="https://telegram.org/js/telegram-widget.js?15"
