@@ -4,7 +4,7 @@
 /* Front-matter */
 
 .front {
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
 }
 
 .front__title {
@@ -14,7 +14,6 @@
 
 .highlight {
   position: relative;
-  margin-block: 1em;
   @include t.text(lg);
 
   &::before {
