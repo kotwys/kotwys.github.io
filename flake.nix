@@ -1,4 +1,6 @@
 {
+  description = "kotwys.github.io development environment";
+
   inputs.utils.url = "github:numtide/flake-utils";
 
   outputs = { self, nixpkgs, utils, ... }:
