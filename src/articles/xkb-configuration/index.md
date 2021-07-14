@@ -2,6 +2,7 @@
 title: XKB тупатъян тамуг
 layout: article.njk
 date: 2021-07-12
+otherlangs: [en]
 cover:
     url: cover.jpg
     alt: Нюртэтпул, шорысьтыз куинь нюртэт шуэ «X K B»

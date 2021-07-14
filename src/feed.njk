@@ -22,6 +22,9 @@ lang: udm
   <entry xml:base="{{ site.url }}{{ article.url }}">
     <title>{{ article.data.title }}</title>
     <link href="./." type="text/html"/>
+    {% for lang in article.data.otherlangs %}
+    <link href="./{{ lang }}" hreflang="{{ lang }}" type="text/html"/>
+    {% endfor %}
     <id>{{ site.url }}{{ article.url }}</id>
     <published>{{ article.data.date | isoDate }}</published>
     {% if article.data.abstract %}
