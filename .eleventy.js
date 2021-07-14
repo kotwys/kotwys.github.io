@@ -1,5 +1,6 @@
 const { URL } = require('url');
 const htmlmin = require('html-minifier');
+const xmlmin = require('minify-xml');
 const readingTime = require('reading-time');
 
 const IntlPolyfill = require('intl');
@@ -102,6 +103,14 @@ module.exports = (config) => {
         collapseWhitespace: true,
         removeComments: true,
       });
+    }
+
+    return content;
+  });
+
+  config.addTransform('xmlmin', function (content, outputPath) {
+    if (outputPath && outputPath.endsWith('.xml')) {
+      return xmlmin.minify(content);
     }
 
     return content;
