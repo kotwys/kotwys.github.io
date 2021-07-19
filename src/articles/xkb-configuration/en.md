@@ -1,6 +1,5 @@
 ---
 title: XKB Configuration Hell
-layout: article.njk
 lang: en
 date: 2021-07-12
 cover:

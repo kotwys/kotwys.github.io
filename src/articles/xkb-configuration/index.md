@@ -1,6 +1,5 @@
 ---
 title: XKB тупатъян тамуг
-layout: article.njk
 date: 2021-07-12
 otherlangs: [en]
 cover:
