@@ -28,7 +28,7 @@ skipFooterLinks: true
       {%- endif -%}
     </h2>
     <ul class="all-articles">
-      {% for article in collections.articles | limit(6) %}
+      {% for article in collections.articles | reverse | limit(6) %}
         {% include 'article-preview.njk' %}
       {% endfor %}
     </ul>

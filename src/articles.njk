@@ -6,7 +6,7 @@ layout: page.njk
 <main class="container">
   <h1 class="section__heading">Блог</h1>
   <ul class="all-articles">
-    {% for article in collections.articles %}
+    {% for article in collections.articles | reverse %}
       {% include 'article-preview.njk' %}
     {% endfor %}
   </ul>
