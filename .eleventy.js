@@ -53,8 +53,8 @@ module.exports = (config) => {
 
   config.addShortcode('image', (url, alt, caption) => 
     `<figure>
-      <img alt="${alt}" src="${url}"/>
-      ${caption ? `<figcaption>${caption}</figcaption>` : ''}
+      <img ${alt ? `alt="${alt}"` : ''} src="${url}"/>
+      ${caption ? `<figcaption>${caption}</figcaption>` : '<!-- -->'}
     </figure>`
   );
 
