@@ -41,7 +41,10 @@ async function toJSON() {
 
 async function find(word) {
   const db = await Database.open(DB_PATH, Database.OPEN_READONLY);
-  const row = await db.get('SELECT hash FROM words WHERE word = ?', [word]);
+  const row = await db.get(
+    'SELECT hash FROM words WHERE word = ?',
+    [word.toLowerCase()]
+  );
   return row?.hash;
 }
 
