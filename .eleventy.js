@@ -40,7 +40,6 @@ module.exports = (config) => {
   config.setDataDeepMerge(true);
 
   config.addPassthroughCopy('src/assets');
-  config.addPassthroughCopy('src/scripts');
   config.addPassthroughCopy('src/**/*.(html|png|jpg)');
 
   config.addCollection('articles', api =>

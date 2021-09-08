@@ -13,7 +13,7 @@ commit=$(git rev-parse --short HEAD)
 
 [[ -d dist/ ]] && rm -r dist/
 yarn build
-cd ./build
+cd ./dist
 
 git init
 git add -A

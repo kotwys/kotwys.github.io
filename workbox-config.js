@@ -1,5 +1,5 @@
 module.exports = {
-	globDirectory: 'build/',
+	globDirectory: 'dist/',
 	globPatterns: [
 		'index.html',
 		'offline.html',
@@ -8,5 +8,5 @@ module.exports = {
 		'scripts/**/*.js',
 		'styles/**/*.css'
 	],
-	swDest: 'build/sw.js'
+	swDest: 'dist/sw.js'
 };
