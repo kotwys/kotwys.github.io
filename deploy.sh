@@ -11,7 +11,7 @@ fi
 REPO=ssh://git@github.com/kotwys/kotwys.github.io.git
 commit=$(git rev-parse --short HEAD)
 
-[[ -d dist/ ]] && rm -r dist/
+[[ -d dist/ ]] && rm -rf dist/
 NODE_ENV=production yarn build
 cd ./dist
 
