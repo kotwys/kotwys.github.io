@@ -39,6 +39,17 @@ const rdfTransform = (property) => {
 module.exports = (config) => {
   config.setDataDeepMerge(true);
 
+  /** @type {import('markdown-it').Options} */
+  const mdOptions = {
+    html: true,
+  };
+  const md = require('markdown-it')(mdOptions)
+    .use(require('markdown-it-texmath'), {
+      engine: require('katex'),
+    });
+  
+  config.setLibrary('md', md);
+
   config.addPassthroughCopy('src/assets');
   config.addPassthroughCopy('src/**/*.(html|png|jpg)');
 

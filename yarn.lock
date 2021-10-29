@@ -2347,6 +2347,11 @@ commander@^5.1.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
   integrity sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
 
+commander@^6.0.0:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-6.2.1.tgz#0792eb682dfbc325999bb2b84fddddba110ac73c"
+  integrity sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
+
 commander@^7.0.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
@@ -4670,6 +4675,13 @@ just-debounce@^1.0.0:
   resolved "https://registry.yarnpkg.com/just-debounce/-/just-debounce-1.1.0.tgz#2f81a3ad4121a76bc7cb45dbf704c0d76a8e5ddf"
   integrity sha512-qpcRocdkUmf+UTNBYx5w6dexX5J31AKK1OmPwH630a83DdVVUIngk55RSAiIGpQyoH0dlr872VHfPjnQnK1qDQ==
 
+katex@^0.13.19:
+  version "0.13.19"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.13.19.tgz#017e4c6aade5c50b99d18908393ed4e1df5a3f4a"
+  integrity sha512-5a3eZvdSfdQStJhNDM3JuEOtI9U3N+KzmutLNf76YHosZeA6bcas45O4AwQQ2oVh5xHs5jiUBn5t+s2Cue+bGw==
+  dependencies:
+    commander "^6.0.0"
+
 kefir@^3.8.8:
   version "3.8.8"
   resolved "https://registry.yarnpkg.com/kefir/-/kefir-3.8.8.tgz#235932ddfbed422acebf5d7cba503035e9ea05c5"
@@ -4926,6 +4938,11 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+markdown-it-texmath@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/markdown-it-texmath/-/markdown-it-texmath-0.9.1.tgz#fdf1442afbca474e9170b9707b6155125384bae2"
+  integrity sha512-hRA5KQcgBJf5q3qDBcui4s/VkzjGC/l1ILviLNrdW22cT9JXHKdEA2ZTk1RRtFuiif2AbrbiMEoEwV6tBFwiEw==
 
 markdown-it@^10.0.0:
   version "10.0.0"
