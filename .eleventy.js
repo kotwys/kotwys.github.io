@@ -1,3 +1,5 @@
+const { readFileSync } = require('fs');
+const yaml = require('js-yaml');
 const { URL } = require('url');
 const htmlmin = require('html-minifier');
 const xmlmin = require('minify-xml');
@@ -39,6 +41,8 @@ const rdfTransform = (property) => {
 module.exports = (config) => {
   config.setDataDeepMerge(true);
 
+  const dictionary = yaml.load(readFileSync(__dirname + '/src/data/words.yml'));
+
   /** @type {import('markdown-it').Options} */
   const mdOptions = {
     html: true,
@@ -46,6 +50,11 @@ module.exports = (config) => {
   const md = require('markdown-it')(mdOptions)
     .use(require('markdown-it-texmath'), {
       engine: require('katex'),
+    })
+    .use(require('./utils/word-parser'), {
+      dictionary: Object.fromEntries(
+        dictionary.map(({ initial,def }) => [initial, def])
+      ),
     });
   
   config.setLibrary('md', md);
@@ -66,10 +75,6 @@ module.exports = (config) => {
       <img ${alt ? `alt="${alt}"` : ''} src="${url}"/>
       ${caption ? `<figcaption>${caption}</figcaption>` : '<!-- -->'}
     </figure>`
-  );
-
-  config.addShortcode('word', (hash, declension) =>
-    `<span role="term" tabindex="0" data-word="${hash}">${declension}</span>`
   );
 
   config.addShortcode('rdfmeta', function (data) {

@@ -2,6 +2,6 @@
 
 pkgs.mkShell {
   buildInputs = builtins.attrValues {
-    inherit (pkgs) nodejs yarn openssl sqlite;
+    inherit (pkgs) nodejs yarn;
   };
 }
