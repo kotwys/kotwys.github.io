@@ -95,7 +95,7 @@ module.exports = (config) => {
       day: 'numeric',
       month: 'short',
       year: 'numeric',
-    }).format(date).replace(/ аре$/, '')
+    }).format(date)
   );
 
   config.addFilter('langname', lang =>
