@@ -26,9 +26,10 @@ the documentation doesn't seem to have gone far since then.
 
 ## The problem
 
-{% image 
-"https://ilyabirman.ru/projects/typography-layout/i/layout-win@2x.png", "", 
-"Ilya Birman's typographic layout" %}
+<figure>
+<img src="https://ilyabirman.ru/projects/typography-layout/i/layout-win@2x.png" alt=""/>
+<figcaption>Ilya Birman's typographic layout</figcaption>
+</figure>
 
 I'm using [Ilya Birman's typographic layout][ilya-birman] for a while now (no 
 ads.) It's quite easy to type in different symbols with diacritics with it. But 
@@ -132,8 +133,10 @@ By the way, these options (`grp:*`) define the way to switch groups. All the
 different layouts are in fact symbol groups laid one on top of the other, even 
 if it isn't said so to the user. These symbols groups form one big layout.
 
-{% image "groups.jpg", "Underneath is English group +en:1, atop is Russian 
-+ru:2", "English and Russian groups" %}
+<figure>
+<img src="groups.jpg" alt="Underneath is English group +en:1, atop is Russian +ru:2">
+<figcaption>English and Russian groups</figcaption>
+</figure>
 
 The typographic layout was meant to apply on top of English and Russian 
 layouts. But not so fast.

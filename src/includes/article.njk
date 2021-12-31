@@ -47,7 +47,10 @@ eleventyComputed:
     </header>
     <article class="article__content">
       {% if cover %}
-      {% image cover.url, cover.alt, cover.caption %}
+      <figure>
+        <img src="{{ cover.url }}" alt="{{ cover.alt }}">
+        {% if cover.caption %}<figcaption>{{ cover.caption }}</figcaption>{% endif %}
+      </figure>
       {% endif %}
       {{ content | safe }}
     </article>

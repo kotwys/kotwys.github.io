@@ -66,17 +66,6 @@ module.exports = (config) => {
     api.getFilteredByGlob('src/articles/**/index.md')
   );
 
-  config.addPairedShortcode('highlight', content =>
-    `<p class="highlight">${content}</p>`
-  );
-
-  config.addShortcode('image', (url, alt, caption) => 
-    `<figure>
-      <img ${alt ? `alt="${alt}"` : ''} src="${url}"/>
-      ${caption ? `<figcaption>${caption}</figcaption>` : '<!-- -->'}
-    </figure>`
-  );
-
   config.addShortcode('rdfmeta', function (data) {
     return flattenRdf(data)
       .map(([path, value]) => {
