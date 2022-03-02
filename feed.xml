@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://kotwys.github.io" xml:lang="udm"><title>Коӵыш Микайлолэн блогез</title><link href="/articles"/><link rel="self" href="/feed.xml" type="application/atom+xml"/><author><name>Коӵыш Микайло</name></author><updated>2022-03-02T15:07:13.493Z</updated><id>https://kotwys.github.io</id><icon>/assets/logo.png</icon><entry xml:base="https://kotwys.github.io/articles/xkb-configuration/"><title>XKB тупатъян тамуг</title><link href="./." type="text/html"/><link href="./en" hreflang="en" type="text/html"/><id>https://kotwys.github.io/articles/xkb-configuration/</id><published>2021-07-12T00:00:00.000Z</published><summary>X Keyboard гожъян амалдэ тупатыны паськыт луонлыкъёс сётэ — но соосты  кутыны нырысь ик амал шедьтоно луэ.
+</summary><content type="text/html"><![CDATA[
+        <div><aside>
+<p>УК;ӦЛ: NixOS:эз кутӥськоды ке, дась модулез <a href="https://github.com/kotwys/lymypyry/blob/main/modules/extra-xkb-options.nix">лымыпырыысьтым</a> басьтэмды
+луэ.</p>
+</aside>
+<p>XKB (X Keyboard) – со Linux:лэн юзчи котыретысьтыз <span title="клавиатура" data-word="нюртэтпул">нюртэтпулэз</span>
+каньыл кутон понна кыл кутӥсез люкетыз. Солы луыса ик асьмелэн вань пӧртэм
+кылъёс но радъямъёс, кылсярысь.</p>
+<p>Нимызъя ай валамон, со XFree86 юнман дыре кылдэм шуыса. Но али гинэ но, Wayland
+дорамы вуыса, XKB Linux-сӧзнэтъёсын кыле. Нош документъянэз ог куамын ар
+ортчыса кыдёке вуымтэ кадь.</p>
+<h2>Ужпум</h2>
+<figure>
+<img src="https://ilyabirman.ru/projects/typography-layout/i/layout-win@2x.png" alt=""/>
+<figcaption>Илья Бирманлэн типограф радъямез</figcaption>
+</figure>
+<p>Мон кемалась кутӥсько <a href="https://ilyabirman.ru/projects/typography-layout/">Илья Бирманлэсь типограф радъямзэ</a> (мыным
+дун ӧз тыре). Соин тарак каньыл пӧртэм пусъёс гожъяны луэ, удмуртъёссэ но. Нош
+Лӥнуксын со ӧвӧл кадь… ӧвӧл-а?</p>
+<p>Кудняласен ке XKB:ын вань ни <code>misc:typo</code> пуктэт, со типограф радъям вылэ ик
+инъямын, пе. «Ваньмем нюртэтъёс» нош отын ӧвӧл (кудъёсыз собере зӥбем
+<span title="клавиша" data-word="нюртэт">нюртэтэн</span> ӵош сёто одӥг дӥакритӥкен пус, ⟨ӧ⟩ кадь). Ӧйтӧд, малы
+сыӵе каремын — оло, Илья Бирманлэсь ужзэ быдэсак кӧчыртонтэм вылысь (эрико
+небытбур ук!), оло, тырмыт калыккуспо ӧвӧл шуыса. Кыӵе бен малыез ӧй луысал,
+соин мар ке кароно вал.</p>
+<p>Вотэс пӧлын вань <a href="https://github.com/neochief/birman-typography-layouts-for-ubuntu">Ubuntu:лы дасям радъям</a>. Со но шектэм ӧвӧл вылэм,
+одӥг-ог пус ыштэм. Вылаз ик, сю арысь огпол XKB выльдӥськыку кышъетэз выльысь
+пуктыны. Соин ик ачим кыӵе-мар тодоно кариськи.</p>
+<h2>Тупатъян</h2>
+<p>Радъямъёс но пуктэтъёс ваньмыз пус люкамъёс луо. Со сяна XKB нюртэмъёсты
+возьма, нюртэтпул дорысь потась кодъёс валэктэ но мукетыз — асьмелы со тунсыко
+ӧвӧл.</p>
+<p>Радъямъёс нюртэтъёсты ваньзэ тырем карисько, пуктэтъёс нош — куд-огзэс,
+нырысетӥезлы сыӵе <em>сураськон</em> луыса. Со сяна, соос одӥг арбери бере, огез пушкы
+мукетсэ пыртыны луэ.</p>
+<pre><code>/usr/share/X11/xkb/symbols/us
+
+// Таиз радъям.
+// Куинь нырысетӥез кыл тунсыко ӧвӧл, соос радъямлэсь кӧня ке куара-лыд пус 
+// тыремзэ гинэ пусъё.
+partial alphanumeric_keys default
+xkb_symbols &quot;basic&quot; {
+  keys &lt;AD01&gt; { [ q, Q ] };
+  keys &lt;AD02&gt; { [ w, W ] };
+  // но озьы азьлань
+};
+
+/usr/share/X11/xkb/symbols/typo
+
+// Таиз пуктэт.
+partial alphanumeric_keys
+xkb_symbols &quot;deadkeys&quot; {
+  // Пуслюкамъёс троссэ ньыль пагӟалэсь пӧрмо. Котьку сямен соос тазьы сэзьдо:
+  //                 1.        2.        3.         4.
+  //                         Shift     AltGr    Shift+AltGr
+  keys &lt;AD01&gt; { [ NoSymbol, NoSymbol, NoSymbol, dead_breve ] };
+  keys &lt;AD04&gt; { [ NoSymbol, NoSymbol, NoSymbol, dead_abovering ] };
+  // но озьы азьалнь
+};
+
+// Нош татын ваньзэ огазе кариськом
+partial alphanumeric_keys
+xkb_symbols &quot;layout_extra&quot; {
+  include &quot;us(basic)+deadkeys+level3(ralt_switch)&quot;
+};
+</code></pre>
+<p>Вылӥысь гожтэм ватса <code>layout_extra</code> радъямез. AltGr (бурпалась Alt) но бадӟым Q
+огдыре зӥбыса кылдоз олокыӵе отӥяз пыртэм пус вылэ лякиськоно бреве (Й гожпус
+вылысь кадь ик). <code>layout_extra</code> шара пыртэ <code>level3(ralt_switch)</code> пуктэтэз,
+AltGr куиньметӥ пагӟае выжтон мед луоз шуыса — вань мукетъёсыз пуктэтъёс
+(Windows:лэсь пӧртэм луыса, шонер луисько ке).</p>
+<p>Таиз люкетыз секыт ӧвӧл — пусъёсты гожтыса кӧня ке пуконо луоз гинэ (но эн
+вунэтэ виштыкугӟетэз <code>xkb_symbols</code> ялэм бере). Сӧзнэтлы сое адӟымон каронэз —
+маиз секытэз.</p>
+<p>XKB:ысь ваньмыз сюре бадӟым эсэпрадъёсын лыдметэ. Котьку сямен со
+<code>rules/evdev</code>, вань мукетъёсыз но. Та ужкагазын гожтэмын, ку, кызьы но кытын
+со-мар пуслюкамъёс итӥсько.</p>
+<p>Радъямъёс понна азьвыл поттэм <a href="https://github.com/neochief/birman-typography-layouts-for-ubuntu">Ubuntu:лы радъямез</a> учкемды луэ. Мон нош
+валэкто пуктэтъёслэн кызьы ужамзэс.</p>
+<h3>Эсэпрадъёс</h3>
+<p>Ваньмыз пуктэт evdev:ын ӧжытсэ одӥг люкетаз сюре:</p>
+<pre><code>/usr/share/X11/xkb/rules/evdev
+
+! option = symbols
+  grp:shift_toggle = +group(shifts_toggle)
+  grp:switch = +group(grp_switch)
+  // но озьы азьлань
+</code></pre>
+<p>Тани, кыктэтӥ кесэгысь пуслюкамъёс адӟымон луо нырысетӥ кесэгысь нимын. Собере
+соосты <code>setxkbmap</code> яке мукет юзчи азьдор пыр пуктыны луэ.</p>
+<pre><code>$ setxkbmap -option grp:shift_toggle
+</code></pre>
+<p>Нялтас вераса, та пуктэтъёс (<code>grp:*</code>) пусгрупаез воштон амалэз пусъё. Ваньмыз
+пӧртэм радъямъёс зэмзэ огез вылэ мукетыз понэм пусгрупаос луо, со юзчилэсь умой
+ватэмын ке но. Со пусгрупаос огазе одӥг бадӟым радъямлы пӧрмо.</p>
+<figure>
+<img src="groups.jpg" alt="Улӥын англи пусгрупа +en:1, вылӥяз — ӟуч +ru:2"/>
+<figcaption>Улӥын англи пусгрупа +en:1, вылӥяз — ӟуч +ru:2</figcaption>
+</figure>
+<p>Типограф радъямез лэсьтыны утчаса, мыным кулэ вал сое ӟуч но англи кылъёсын
+кутыны. Нош… со тазьы капчи ӧвӧл вылэм.</p>
+<p>Ӟуч но англи радъямъёс пӧртэм пусгрупаос луыса, котькудӥзлы быдэ пуктэтэз нимаз
+поныны кулэ. Сотэк со англи пусгрупаын гинэ кутымон луоз (англиез нырысетӥез
+радъямды ке).</p>
+<p>Эсэпрад лыдметын бугыртыса, шедьтӥ, <code>misc:typo</code> но огез мукетыз пуктэт аспӧртэм
+луо шуыса. Соос вератэк котькудӥз пусгрупа борды итӥсько шуыса. Нош со тазьы
+гожтэмын лыдметын:</p>
+<pre><code>! layout    option    = symbols
+  *         misc:typo   +typo(base)
+
+! layout[1] option    = symbols
+  *         misc:typo   +typo(base):1
+
+! layout[2] option    = symbols
+  *         misc:typo   +typo(base):2
+
+// но озьы ньылёзь
+</code></pre>
+<p>Мукет сямен вераса, ваньмыз пусгрупалы быдэ, <code>misc:typo</code> пуктэмын ке, кулэ
+луись пуслюкам итӥське верам кеме мыныса (<code>+...:n</code>).</p>
+<p>Соин ик, выль ваньмем пусъёсты ваньмыз радъямын кутымон карыны понна, та
+чуръёсты ватсано (нимез но <code>n</code> тупасьлы воштыса).</p>
+<pre><code>  en &lt;ним&gt; = +typo(deadkeys):n
+  ru &lt;ним&gt; = +typo(deadkeys):n
+</code></pre>
+</div>
+      ]]></content></entry><entry xml:base="https://kotwys.github.io/articles/a11y-review/"><title>Могӟонтэмлык полӥс</title><link href="./." type="text/html"/><id>https://kotwys.github.io/articles/a11y-review/</id><published>2021-09-07T00:00:00.000Z</published><summary>Туала вотэслэсьтон могӟонтэмлыклы (accessibility) трос сак висъя. Татын  учкомы, маиз удмурт вотэсгердъёсысь со ласянь тупатымон луэ.
+</summary><content type="text/html"><![CDATA[
+        <div><p><dfn>Могӟонтэмлык</dfn>, яке англи кылын вераса <dfn>accessibility</dfn>
+(ӵемысь вакчиятэмын «a11y» кадь) — вотэсбамлэн одӥгез кулэлыко аслыкез, макем
+сое кутылыны каньыл но капчи, вань-а кыӵе ке могӟонъёс.</p>
+<p>Со паськыт арбери но, пӧртэмесь могӟон люкетъёс вань. Огъя малпамлэсь пӧртэм
+луыса, могӟонтэмлык синтэм юзчиос сярысь гинэ ӧвӧл (соос сярысь но малпаськоно
+ке но). Ваньмылэн, луоз, таӵе югдуре сюреммы вань: кыӵе ке вотэсбамез пелепонэн
+учкыса, уно сое отчы-татчы берыкъялляно луэ, ваньзэ лыдӟыны-учкыны понна.
+Чыры-пыры кадь но, ӝож ай.</p>
+<p>Вотэс асьме дыре ӝог азьлане мынэ но, али вотэсэ потэммы луэ пӧртэм
+лэсьтэтъёсын. Огзэ но санэ понытэк кельтонтэм. Я, со кылӥськем кем секыт ӧвӧл —
+тросэз ужпум HTML <span title="спецификация" data-word="валэктон">валэктонъя</span> каронтэмысь потэмын.</p>
+<hr>
+<p>Туннэ могӟонтэмлык ласянь ӵем пумиськылӥсь янгышъёсты одӥг-ог удмурт
+вотэсгердъёсысь возьматыса валэкто. Татчы пыремъёслэн лэсьтӥсьёссы асьсэзы
+ултӥямын медаз кожалэ, ваньмыз эш мылкыдын луэ!</p>
+<aside>
+<p>Мон нокызьы вотэсгердъёслэсь пуштроссэ уг курласькы. Котьма ке но, удмуртлык
+сярысь вотэсысь тодымон карон — туж бадӟым уж. Нош асьмелэн,
+вотэслэсьтӥсьёслэн, ужмы — сое кызьы луэ озьы умой-умой лэсьтыны.</p>
+</aside>
+<h2>Дӥватоз</h2>
+<p>Дӥватоз шуо <code>&lt;div&gt;</code> <span title="татын: тег" data-word="пусъет">пусъетэз</span> укыр уно кутылонэз.</p>
+<p><a href="https://meras.info/udm_UDM">Merás</a> но, <a href="https://invozho.su">Инвожо</a> но вотэсгердъёс потӥсь менюзэс усьтыны
+нюртонэз малы ке озьы  ик пусйиллям — я, Инвожолэн со <code>&lt;span&gt;</code>, — HTML:лэн аслаз
+<span title="интерактивной" data-word="вачекуспаськись">вачекуспаськись</span> элементъёслы пусъетъёсыз вань
+дыръя. Ярам, ас кожады вачекуспаськонэз лэсьтэмды потэм но котькинлэн сое
+кутэмез мед луоз шуыса кариллямды ке (малы — мукетыз ни юан). Но татын озьы уг
+луы. Отчы <span title="клавиатура" data-word="нюртэтпул">нюртэтпулэн</span> сюронтэм, зэмос вачекуспаськись
+элементъёс сямен ик соос Tab-черодэ уг сюро бере. Сое <code>tabindex=&quot;0&quot;</code> атрибут
+ватсаса тупатыны луысал:</p>
+<pre><code class="language-html">&lt;span id=&quot;show-menu&quot; title=&quot;Меню&quot; tabindex=&quot;0&quot;&gt;
+  &lt;i class=&quot;menui-&quot;&gt;&lt;/i&gt;
+&lt;/span&gt;
+</code></pre>
+<p>Нош таиныд со уг йылпумъяськы. <code>click</code> учырез чалкаса сяна нюртон зӥбонэз но
+чаклано: <code>Enter</code> но <code>Space</code>. Вакчияк вераса, капчи гинэ луоз <code>&lt;button&gt;</code> кутыны.</p>
+<h2>Фокус</h2>
+<p>Татын ӧжыт веранэз. Кемалась ик ӧвӧл вал сыӵе вакыт, ку ваньмыз фокусэз ватоз
+вал, нош мукет дыръёс вуиллям. Одӥг но вотэсгерд фокусэлэсь кытын луэмзэ уг
+возьматы.</p>
+<p><span title="веб-браузер" data-word="вотэсучкон">Вотэсучконъёс</span> таре ӝикыт гинэ фокусэз возьматыны амал сёто. Етӥзлыкынызы соос
+валало, вотэсбамен вачекуспаськом нюртэтпулэн-а, мукет макеен-а мынэ но, соя
+фокусэз возьмато яке вато, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible"><code>focus-visible</code> псэудокласс</a> вошъяса.</p>
+<h2>Потӥсь менюос</h2>
+<p>Merás но <a href="https://udmdunne.ru">Удмурт Дунне</a> вотэсгердъёсын потӥсь менюос огшоры гинэ класс
+ватсамен-куштэмен лэсьтэмын. Озьы гинэ вераса номыриз но урод ӧвӧл, нош соос
+ворсамын дыръя но блок луо. Озьыен, мынам Tab:ен отчы сюреме луэ но, мон
+кытынме ум адӟы (экранлыдӟонэн пырасьёслы соин каньылгес луоз).</p>
+<p>Кык шонертонэз вань: я меню ватэмын дыръя сое тыпак <code>display: none</code> кароно
+(Инвожо вотэсгердын кадь ик), я пушказ фокус вань дыръя сое юри усьтоно.</p>
+<h2>Alt-тэкст</h2>
+<p>Куинь вотэсгердысь суредъёслы воштӥсь текст лэсьтыны куинь пӧртэм амал шедьтӥ,
+огзэ но умой ӧй шуысал:</p>
+<ul>
+<li>Удмурт Дунне: alt:э ужкагазним сюре кадь, йылаз-пумаз одӥг кыл гинэ верамон
+(ксь, «газ-1». Мар газ?)</li>
+<li>Инвожо: статьяослэсь валтӥсь суредзэс сяна адӟеме ӧвӧл, соос ай статьялэсь
+нимзэ нулло. Маиз умойтэм — огшапскын валэкто.</li>
+<li>Merás: тыпак номыр, дорбамысьтызы юлтошъёссылэн логооссы сяна — соос озьы
+гинэ «Logo» шуыса валэктэмын луо (кинлэн логоез?).</li>
+</ul>
+<figure>
+<img src="alt.png" alt=""/>
+</figure>
+<p>Вань ай синмо но пырасьёслы пайдаез: суред кыскиськыны луонтэм дыръя, со интые
+ик alt-тэкст луоз.</p>
+<p>Озьы ик валэктытэк кельтэм <span title="иконка" data-word="покчипус">покчипусъёс</span> шедьтӥ. Азьвыл ик верам
+меню усьтон, кылсярысь. Синтэм пырась марзэ-малызэ уз вала, отын чик тэксто
+пуштрос ӧвӧлэн. Сое тупатыны капчи — <code>aria-label</code> атрибут ватсаса.</p>
+<h2><code>lang</code></h2>
+<p>Merás вотэсгердысь ушъямонэз — <code>lang</code> атрибутын <code>udm</code> гожтэмзы.</p>
+<pre><code class="language-html">&lt;html lang=&quot;udm-UDM&quot;&gt;
+</code></pre>
+<p>Кылсярысь, Удмурт Дуннелэн вотэсгердаз, тыпак удмуртэн гожъякузы, отын малы ке
+<code>ru</code> гожъямын. Малы со кулэ? Я, кытын ке азьланяз удмурт тэкст-куара кылдыку,
+синтэм яке ляб адӟись пырасьёс чебер удмурт куараез кылозы. Сотэк програма
+вотэсбамез ӟуч кожалоз но, ӴӦӜӤӞ луоз «Кирилӥк лэтэр Ч вис дӥэрезӥс» тус, кызьы
+со гожпусъёсты вераны тодытэк.</p>
+<p>Нош отын ик тышкаськыны луоноез (ярам, сокем урод ӧвӧл, нош сэректэ монэ).
+Окмоз кыл быръёнын гожъянэз Удмурт<em>СКИЙ</em>! «Удмурт» ке гожтысалды, 32 бит но
+шыръясалды :кырмыштэ:</p>
+<p>Инвожо журнал вотэсгердлэсь кылзэ мукет сямен пусйиллям — кык интыын:
+<code>og:locale</code> мета-пусъетын но <code>Content-Language</code> HTTP-воштосын.</p>
+<pre><code class="language-html">&lt;!-- Локаль --&gt;
+&lt;meta property=&quot;og:locale&quot; content=&quot;udm_UDM&quot; /&gt;
+&lt;meta property=&quot;og:locale:alternate&quot; content=&quot;ru_RU&quot; /&gt;
+&lt;meta HTTP-EQUIV=&quot;Content-language&quot; CONTENT=&quot;udm-UDM&quot; /&gt;
+</code></pre>
+<p>Нырысез утчанмашинаослы но мерлыко вотэсъёслы юрттэ но, соин номыриз но умойтэм
+ӧвӧл, нош <a href="https://www.w3.org/International/questions/qa-http-and-lang">кыктэтӥез кутонтэм шуыса верамын</a>: со амал кабесэ уг
+пыры вал бере, пӧртэм вотэсучконъёс сое олокызьы валало.</p>
+<h2>Инвожолэн статьякартаез</h2>
+<figure>
+<img src="landmarks.png" alt="Экранлыдӟон возьматэ 59 мупус">
+</figure>
+<p>Инвожо вотэсгердэз эскерыса, туж пайми, отын 59 мупуссы (landmark) шуыса. Со ай
+статьякарта пусйылэмысьтызы потэ. Тани возьматосэз (вакчиятэмын):</p>
+<pre><code class="language-html">&lt;article class=&quot;post&quot;&gt;
+  &lt;aside class=&quot;post-thumb&quot;&gt;
+    &lt;a title=&quot;Вероника Ваулина: «Журналист луэмед потэ? Дышетом!»&quot;&gt;
+      &lt;img alt=&quot;Вероника Ваулина: «Журналист луэмед потэ? Дышетом!»&quot;&gt;
+    &lt;/a&gt;
+    &lt;aside class=&quot;post-info&quot;&gt;
+      &lt;a class=&quot;rubrika&quot; href=&quot;0&quot; title=&quot;Интервью&quot;&gt;Интервью&lt;/a&gt;
+      &lt;h1 class=&quot;title&quot;&gt;
+        &lt;a&gt;Вероника Ваулина: «Журналист луэмед потэ? Дышетом!»&lt;/a&gt;
+      &lt;/h1&gt;
+      &lt;time&gt;&lt;i class=&quot;icon-clock&quot;&gt;&lt;/i&gt; 23 авг 2021&lt;/time&gt;
+      &lt;!-- мукетыз --&gt;
+    &lt;/aside&gt;
+  &lt;/aside&gt;
+&lt;/article&gt;
+</code></pre>
+<p>Кӧня ке шекез вань:</p>
+<p>Нырысетӥез, та <code>&lt;article&gt;</code> нергеын палэнысез тодэт вань ӧй шуысал, <code>&lt;aside&gt;</code>
+татын чик кулэтэм. Со ик <code>&lt;aside&gt;</code>-ос троссэ мупусэз лэсьто.</p>
+<p>Кыктэтӥез, одӥг ик йыръянэз куинь пол гожтэмын. Мугез ӧвӧл, мынам малпамея.
+Экранлыдӟон огзэ но кельтытэк лыдӟоз. Суредлэн ватсась тодэтэз ӧвӧл ке,
+alt-текстсэ чылкак буш кельтэгес, оломае кӧчыртытозь. Со азьвыл поттэм статья
+валтӥсьсуредъёс сярысь но верамон: статьялэн нимыз 1) <code>&lt;title&gt;</code> пусъетын, 2)
+адӟиськись йыръянын но 3) суредэз воштӥсь тэкстын луэ. Огезлэсь капчиен
+мозмытскыны луэ.</p>
+<p>Куиньметӥез, статья нимъёс малы ке 1. пагӟаем йыръянъёс каремын. Вотэсбамын со
+одӥг гинэ луыны кулэ но, таосызтӥ ортчыны туж каньыл ӧвӧл. Документлэн радыз
+сӧриське. Тани кызьы умояз югдурын дорбам луыны кулэ:</p>
+<pre><code>[Инвожо]
+ ├─Статьи
+ │ ├╴Вероника Ваулина: «Журналист луэмед потэ? Дышетом!»
+ │ ├╴Алина Ситдикова
+ │ ...
+ │
+ ├─Рубрики (улӥыз)
+ ├─Спецпроекты
+ ...
+</code></pre>
+<p>Нош али со таӵе:</p>
+<pre><code>Вероника Ваулина: «Журналист луэмед потэ? Дышетом!»
+Алина Ситдикова
+...
+└─┬
+  ├─Рубрики (шуак 3. пагӟа)
+  ├─Спецпроекты
+  ...
+</code></pre>
+<p>Синтэм пырасьлы олокызьы валано, вуоноез <em>радлыко</em> йыръян 3. пагӟаын луэ шуыса.</p>
+<p>Ньылетӥез, та картаын куинь чӧлскон вань, кыкез одӥг ик интые вуттэ, одӥгез
+нокытчы но уг вутты. Чӧлсконъёсты но радын возёно но, кыкезлэсь капчиен
+мозмытскыны луэ.</p>
+<figure>
+<img src="links.png" alt="">
+</figure>
+<p>Тани кызьы мон лэсьтысал со картаез:</p>
+<pre><code class="language-html">&lt;article class=&quot;post&quot;&gt;
+  &lt;img class=&quot;post-thumb&quot;&gt;
+  &lt;div class=&quot;post-info&quot;&gt;
+    &lt;span class=&quot;rubrika&quot;&gt;Интервью&lt;/span&gt;
+    &lt;h3 class=&quot;post-title&quot;&gt;
+      &lt;a&gt;Вероника Ваулина: «Журналист луэмед потэ? Дышетом!»&lt;/a&gt;
+    &lt;/h1&gt;
+    &lt;time&gt;&lt;i class=&quot;icon-clock&quot;&gt;&lt;/i&gt; 23 авг 2021&lt;/time&gt;
+    &lt;!-- мукетыз --&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+</code></pre>
+<pre><code class="language-css">.post {
+  position: relative;
+}
+
+.post-title a::before {
+  content: '';
+  /* Чӧлсконлэн вылыз быдэс карта мед басьтоз */
+  position: absolute;
+  inset: 0;
+}
+</code></pre>
+<hr>
+<p>Тани тазьы луэ. Вань мукетъёсыз но <em>сокем могӟонтэм ӧвӧл</em> люкетъёс, но таосыз —
+тужгес но ӵем пумиськылӥсьёсыз. Ваньмылэн татысь пайда поттэммы луиз, оскисько.
+Тау лыдӟемды понна!</p>
+<p>Малпанъёстэс Тэлеграмын верамды луэ 👇</p>
+</div>
+      ]]></content></entry><entry xml:base="https://kotwys.github.io/articles/wikidata-9th-anniversary/"><title>Викидаталы 9 ар</title><link href="./." type="text/html"/><id>https://kotwys.github.io/articles/wikidata-9th-anniversary/</id><published>2021-10-29T00:00:00.000Z</published><summary>Туэ Викидаталэн усьтӥськемезлы 9 ар тырме. Малы со пайдаё, маин солэн Тӥледлы  тунсыко потэмез луэ, — туннэ со сярысь вераськом.
+</summary><content type="text/html"><![CDATA[
+        <div><p><a href="https://wikidata.org/">Викидата</a> (яке Викиданнойёс) со Викимедилэн (Википеди котырын ужась
+огазеяськонлэн) тодэтъёсты машиналы валамон, радъям сямен возён проектэз. Со
+али но трос пайда вайылэ, азьланяз но, улонмы лыдпусо кариськемъя, кулэлыко
+кылёз, малпасько. Нош ваньзэ радызъя вералом.</p>
+<p>Викидата нырысетӥзэ усьтэмын вал 29. коньывуонэ 2012 арын, туэ 9 ар тырмонзэ
+пусйиськомы.</p>
+<h2>RDF</h2>
+<p>Викидаталэн ёзрадыз <abbr title="Resourse Description Framework">RDF</abbr>
+вылэ инъямын. Со Дунневыл Вотэс Консортӥумлэн (W3C) радъям тодэтлы стандартэз
+но ас понназ ик вераськымон арбери.</p>
+<p>RDF:я ваньмыз куиньмоосын (<em>верамъёсын</em>) валэктӥське: <em>субъект — предӥкат —
+объект</em>:</p>
+<pre><code class="language-turtle"># Возьматон понна гинэ псэудокод
+
+# субъект предӥкат           объект
+&lt;Сьӧлта&gt;  &lt;луэ&gt;              &lt;черкогурт&gt;;
+          &lt;кылдон_дырыз&gt;     &quot;1596&quot;^^xsd:dateTime;
+          &lt;улӥсьёслэн_лыдзы&gt; 5204.
+</code></pre>
+<p>Озьыен тодӥмы, Сьӧлта 5204 улӥсен 1596 арын кылдэм черкогурт шуыса. Викидатаын
+со тазьыгес валэктэмын:</p>
+<figure>
+<img alt="" src="wikidata-solta.png">
+<figcaption>
+<a href="https://www.wikidata.org/wiki/Q2511164">Сьӧлта черкогуртлэн Викидатаысь бамыз</a>. Гордэн возьматэмын 
+субъектэз, вожен — предӥкатэз, лызэн — объектэз.
+</figcaption>
+</figure>
+<p>Арберилы быдэ нимысьтыз QID сётэмын (азяз Q гожпусэн лыд), мукет арберилэн та
+ик QID уз лу. Тазьы одӥг нимъем арбериосты ог-огзылэсь висъяны луэ.</p>
+<p>Предӥкатъёс субъектлэсь кыӵе ке аслыксэ возьмато. Соос но нимаз лыдзыя тодмо
+луо: кылсярысь, Сьӧлталэсь кылдэм дырзэ Викидатаын <a href="https://www.wikidata.org/wiki/Property:P571">P571 аслыкен</a>
+валэктӥллям.</p>
+<p>Предӥкатлэн пуштросэз огшоры маке (лыд, чур) яке мукет арбери луэ. Википедиын
+кадь ик, ваньмыз ваньмыныз герӟамын.</p>
+<p>Викидата ас понназ улӥсь онтологи (валанбугор) луэ. Кыӵе ке аслыкъёс, валанъёс
+уг тырмо ке, со ачиз ик соосты кылдытоз.</p>
+<p>Кабес RDF:лэсь пӧртэм луыса, верамъёслэн <em>квалификаторъёссы</em> но <em>ошмесъёссы</em>
+вань. Квалификаторъёс верамлэсь югдурзэ возьмато. Одӥгез ӵем пумиськись
+возьматосэз луэ дыр вадес.</p>
+<figure>
+<img alt="Сьӧлта, улӥсьёслэн лыдзы 5204, вадесэз 2017 ар" src="qualifier.png">
+<figcaption>
+<a href="https://www.wikidata.org/wiki/Property:P585">«Вадесэз» аслык</a> валэктэ, ку улӥсьёслэсь верам лыдзэс тодӥллям.
+</figcaption>
+</figure>
+<p>Ошмесъёс верамлэсь кытысь потэмзэ возьмато, зэмлыкез мед возиськоз шуыса.</p>
+<h2>Куронъёс</h2>
+<p>Мынам малпамея тунсыкоез — куронъёс лэсьтыны. Ваньзэ та люкам тодэтэз
+автоматлыко эскерыны луэ, йӧспӧртэм куронъёс келяса: кӧня Удмуртшаерын вордскем
+адямиос кыӵе ке данъет басьтӥллям, кудӥз вылӥдышетсконни уногес тодослыко
+статья поттэм, ма ужбергатонниослэн кунсьӧр ёзэтсы вань но озьы азьлань.</p>
+<p>Гуртэ ужме лэсьтыса берпуметӥзэ куронэз гожтӥ но нырысь-валысь медытэк тодӥ,
+Тогоын, кылсярысь, калыккуспо банк вань шуыса:</p>
+<pre><code class="language-sparql">SELECT ?corp ?corpLabel (SAMPLE(?stateLabel) AS ?state)
+WHERE {
+  ?corp wdt:P31/wdt:279* wd:Q6881511;
+        wdt:P17 ?state;
+        wdt:P355 ?subsidiary.
+  MINUS { ?subsidiary wdt:P17 ?state. }
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language &quot;[AUTO_LANGUAGE],en&quot;.
+    ?corp rdfs:label ?corpLabel.
+    ?state rdfs:label ?stateLabel.
+  }
+}
+GROUP BY ?corp ?corpLabel
+HAVING (COUNT(DISTINCT ?subsidiary) &gt; 1)
+</code></pre>
+<blockquote>
+<p><a href="https://w.wiki/4HFr">Асьтэлэн куронэз быдэстэмды луэ</a></p>
+</blockquote>
+<p>Куронъёс RDF:лы лэсьтэм <a href="https://wdqs-tutorial.toolforge.org">SPARQL</a> кылын гожъясько. Тодмо куиньмоосты
+адӟиськомы, соос таре QID но PID:ъёсын нимамын ке но. SQL:ез тодӥськоды ке, туж
+ик секыт луыны кулэ ӧвӧл.</p>
+<h2>Малыез</h2>
+<p>Викидатаез трос амалэн кутыны луэ. Пичизэ вераса, ушъян-ӵектон кампаньёсты
+эскерон, визьсынанъёс лэсьтон, котьку азьлане мынымон. Нош тани мар со Викимеди
+сӧзнэтын ик каре:</p>
+<h3>Огазея</h3>
+<p>Усьтӥськыкуз ик, Викидата троскылъем Википедиез ваньзэ огазе карыны турттэм.
+Али котькуд QID:лэн пӧртэм кылъёсын Википедиосысь герӟам статьяосыз вань. Со
+QID:ъёс пыр ай ӟуч кылысь удмуртэ, англиысь немыче выжеммы луэ.</p>
+<figure>
+<img alt="Викидатаысь викикуспо чӧлсконъёс" src="languages.png">
+</figure>
+<p>Азьло гожъясь ачиз ваньзэ чӧлсконъёсты нимаз гожтоно вал.</p>
+<h3>Туннала возе</h3>
+<p>Википедилэн вань 312 ужась версиез, ваньмаз но тодэт туннала калын луыны кулэ.
+Но солы кужым ноку но уз луы, туж мылкыд каримы ке но. Викидаталэн татын
+асьмелы юрттэмез луэ, котьку берлозэ тодэтэз сётыса ваньмыныз кылын.</p>
+<p>Алиез сярысь вераса, Викидатаысь тодэтъёс статьяосысь куд-ог пулъёсын
+(infobox:ъёсын) кутӥське. Умояз югдурын соин ваньмыз таблицаос, лыдметъёс
+тырмоно.</p>
+<p>Мукетыз тунсыко проект <a href="https://meta.wikimedia.org/wiki/Abstract_Wikipedia">Абстракт Википеди</a> луэ. Со чакла статьяослэсь
+текстсэс ик Викидатая гожъяны. Соин, статья Викидаталэн куд-ог функциез луэ:</p>
+<section><eqn><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>article</mtext><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>x</mi><mn>3</mn></msub><mo separator="true">,</mo><mo>…</mo><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\text{article} = f(x_1,x_2,x_3,\ldots).</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord text"><span class="mord">article</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></eqn></section></math>
+<p>Озьы статьяос туннала калын гинэ ӧвӧл, мыдлань малпанъёстэк но луозы,
+тодэтъёсты тупатыны ваньмызлэн луоз бере. Пичигес кылъёсын но тросгес ивортодэт
+кылдоз — функци гинэ лэсьтоно, мукетыз ни асэрказ кариськоз.</p>
+<p>Уг малпаськы, озьы ке но, ваньзэ статьяез озьы печатланы луоз шуыса, нош
+нырысетӥ чуръёссэ малы уз.</p>
+<hr>
+<p>Туэ сӥзьылысен гинэ ӟечгес тодматски та проектэн но луонлыкъёсызлы туж
+синмаськи. Ваньдэсты пыриськыны, удмурт Викидатаез улӟытыны ӧтисько!</p>
+</div>
+      ]]></content></entry></feed>

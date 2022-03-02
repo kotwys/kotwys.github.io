@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="udm"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XKB Configuration Hell</title><meta property="og:type" content="article"><meta property="og:locale" content="udm_RU"><meta property="og:site_name" content="Коӵышгу"><meta property="og:image" content="https://kotwys.github.io/articles/xkb-configuration/cover.jpg"><meta property="og:title" content="XKB Configuration Hell"><meta property="og:description" content="X Keyboard provides vast possibilities to customize your typing, but you&#39;ll  first need to find a way to them.
+"><meta property="og:image:alt" content="A keyboard, three keys in the center say “XKB”"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:creator" content="@kotwys"><meta property="telegram:channel" content="@ktwsgu"><meta property="article:author" content="Коӵыш Микайло"><meta property="article:published_time" content="2021-07-12T00:00:00.000Z"><meta property="tg:site_verification" content=""><link rel="alternate" href="/feed.xml" type="application/atom+xml" title="Коӵыш Микайло"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/styles/main.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.19/dist/katex.min.css"><link rel="canonical" href="https://kotwys.github.io/articles/xkb-configuration/en.html"><meta name="theme-color" content="#5b0082"></head><body><div class="banner">Украиншаерен ожлы пумит!</div><header class="header"><a class="logo" href="/" aria-label="Дорбаме"><svg width="24.4" height="24" viewBox="0 0 6.5 6.3" fill="currentColor"><g transform="translate(11.8 31.6)"><g transform="translate(-13.5 -35.9) scale(.22728)" opacity="1"><path d="M0 0v24.1h24.4l-9.3-12 9.3-12h-4.5V0H0zm5 5h8.3l-5.2 7 5.4 7H5V5z" transform="matrix(1.16413 0 0 1.16413 7.8 19)"></path></g></g></svg></a><nav class="menu"><ul><li><a class="menu__link" href="/articles"><i data-feather="feather" aria-hidden="true"></i> <span>Блог</span></a></li><li><a class="menu__link"><i data-feather="book" aria-hidden="true"></i> <span>Кыллюкам</span></a></li></ul></nav><button class="theme-switch needs-js header__item rounded" title="Пеймыт тэмаез пуктоно"><i data-feather="moon"></i></button></header><main class="container" lang="en"><div class="article prose" itemscope itemtype="https://schema.org/Article"><header class="front"><h1 class="front__title" itemprop="headline name">XKB Configuration Hell</h1><div class="minor"><time datetime="2021-07-12T00:00:00.000Z" itemprop="datePublished">12. пст 2021</time> <span aria-hidden="true">⋅ </span><span>4 минут лыдӟон</span></div><p class="highlight" itemprop="abstract">X Keyboard provides vast possibilities to customize your typing, but you&#39;ll first need to find a way to them.</p></header><article class="article__content"><figure><img src="cover.jpg" alt="A keyboard, three keys in the center say “XKB”"></figure><aside><p>TL;DR: If you're using NixOS, ready module is available in my <a href="https://github.com/kotwys/lymypyry/blob/main/modules/extra-xkb-options.nix">flake</a>.</p></aside><p>XKB (X Keyboard) is the part of Linux graphical environment responsible for comfortable usage of keyboard. Thanks to it we have, for example, different languages and layouts.</p><p>It's clear from its name that XKB appeared when XFree86 was emerging. But even now, as Wayland is coming to us, XKB remains a part of our systems. Meanwhile the documentation doesn't seem to have gone far since then.</p><h2>The problem</h2><figure><img src="https://ilyabirman.ru/projects/typography-layout/i/layout-win@2x.png" alt=""><figcaption>Ilya Birman's typographic layout</figcaption></figure><p>I'm using <a href="https://ilyabirman.ru/projects/typography-layout/">Ilya Birman's typographic layout</a> for a while now (no ads.) It's quite easy to type in different symbols with diacritics with it. But it seems missing on Linux… or is it?</p><p>For some time there is <code>misc:typo</code> option in XKB which is said to be based on the typographic layout. However there are no dead keys (the exact keys allowing to type in diacritics.) I don't know the reason for it—perhaps, not to plagiarize the work of Ilya Birman (we're in free software after all!), or because it wasn't international enough. Whatever the why is, I needed to do something with it.</p><p>There is a <a href="https://github.com/neochief/birman-typography-layouts-for-ubuntu">layout prepared for Ubuntu</a> on the Internet. It isn't flawless either as it lacks a couple of symbols. Furthermore, when XKB is updated once in a blue moon, it's needed to reapply the modifications anew. So I decided to dive in myself.</p><h2>Configuration</h2><p>Layouts and options are all symbol sets. In addition to it XKB cares about key presses and interpreting the codes coming from keyboard but we're not interested in that.</p><p>Layouts are covering most of the keys, and options are covering only a partion being some kind of a mixin to the former. More than that, as they are a single entity, you can include one inside the other.</p><pre><code>/usr/share/X11/xkb/symbols/us
+
+// This is a layout.
+// The first three keywords are not interesting to us, they simply mean that 
+// the layout covers only a part of the alphanumeric keys.
+partial alphanumeric_keys default
+xkb_symbols &quot;basic&quot; {
+  keys &lt;AD01&gt; { [ q, Q ] };
+  keys &lt;AD02&gt; { [ w, W ] };
+  // and so on
+};
+
+/usr/share/X11/xkb/symbols/typo
+
+// This is an option.
+partial alphanumeric_keys
+xkb_symbols &quot;deadkeys&quot; {
+  // Symbol sets are at most composed from four levels which are activated as 
+  // follows:
+  //                 1.        2.        3.         4.
+  //                         Shift     AltGr    Shift+AltGr
+  keys &lt;AD01&gt; { [ NoSymbol, NoSymbol, NoSymbol, dead_breve ] };
+  keys &lt;AD04&gt; { [ NoSymbol, NoSymbol, NoSymbol, dead_abovering ] };
+  // and so on
+};
+
+// And here everything is put all together
+partial alphanumeric_keys
+xkb_symbols &quot;layout_extra&quot; {
+  include &quot;us(basic)+deadkeys+level3(ralt_switch)&quot;
+};
+</code></pre><p>The above adds <code>layout_extra</code> layout. Pressing simultaneously AltGr (the right Alt) and big Q should give us breve symbol which would compose on top of any symbol entered next (as in letter Й.) <code>layout_extra</code> explicitly includes <code>level3(ralt_switch)</code> option so that AltGr is the key to move to the third level, there are other option (differing from Windows IIRC.)</p><p>This part isn't any hard, the question is only to sit a while writing the symbols (and don't forget the semicolon after the <code>xkb_symbols</code> definition.) The hard part is to make it visible to the system.</p><p>Everything in XKB makes its way to the big list of rules. Usually it is <code>rules/evdev</code> (there are other.) In that file it's written when, how and where is one or the other symbol list activated.</p><p>You can look for the layouts in the aforementioned [layout for Ubuntu][layout]. I'll explain the options here.</p><h2>Rules</h2><p>Every options appears at least in one section:</p><pre><code>/usr/share/X11/xkb/rules/evdev
+
+! option = symbols
+  grp:shift_toggle = +group(shifts_toggle)
+  grp:switch = +group(grp_switch)
+  // etc.
+</code></pre><p>Here, symbol list from the second column becomes visible by the name in the first column. And now it's available through <code>setxkbmap</code> or other user interface.</p><pre><code>$ setxkbmap -option grp:shift_toggle
+</code></pre><p>By the way, these options (<code>grp:*</code>) define the way to switch groups. All the different layouts are in fact symbol groups laid one on top of the other, even if it isn't said so to the user. These symbols groups form one big layout.</p><figure><img src="groups.jpg" alt="Underneath is English group +en:1, atop is Russian +ru:2"><figcaption>English and Russian groups</figcaption></figure><p>The typographic layout was meant to apply on top of English and Russian layouts. But not so fast.</p><p>As Russian and English are different symbol groups, it's needed to apply the option to each one separately. Otherwise it would be usable only in the English layout (if it's the first one.)</p><p>Digging through the rule file, I found out that <code>misc:typo</code> and one another option are special. They're implicitly applied to every symbol group. And it's written as follows:</p><pre><code>! layout    option    = symbols
+  *         misc:typo   +typo(base)
+
+! layout[1] option    = symbols
+  *         misc:typo   +typo(base):1
+
+! layout[2] option    = symbols
+  *         misc:typo   +typo(base):2
+
+// and this way to four
+</code></pre><p>In other words, for each symbol group in case of <code>misc:typo</code> enabled the symbol set in question is applied shifted to the specified amount (<code>+...:n</code>.)</p><p>So, to make the newly created dead keys available you need to add these lines (changing the name and <code>n</code> accordingly.)</p><pre><code>  en &lt;name&gt; = +typo(deadkeys):n
+  ru &lt;name&gt; = +typo(deadkeys):n
+</code></pre></article><section id="comments"><h2>Валэктонъёс</h2><script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-discussion="ktwsgu" data-comments-limit="5" data-color="5F0FAE"></script></section></div></main><footer class="footer"><div class="footer__content container"><section><p>Коӵыш Микайло, 2022</p><p><a href="https://11ty.dev/">Eleventy:ен</a> ӝуатэмын</p></section><section><h2 class="section__heading footsec__title">Тэлеграм канал</h2><p>Та артӥколъёсты эскерон но тросгес — <a href="https://t.me/ktwsgu">Коӵышгу</a> каналам</p></section><section><h2 class="section__heading footsec__title">Герӟет</h2><ul class="social-links"><li><a class="social-link" href="https://t.me/kotwys"><i aria-label="Telegram" data-feather="send"></i></a></li><li><a class="social-link" href="https://twitter.com/kotwys"><i aria-label="Twitter" data-feather="twitter"></i></a></li><li><a class="social-link" href="https://github.com/kotwys"><i aria-label="GitHub" data-feather="github"></i></a></li></ul></section></div></footer><script src="https://unpkg.com/feather-icons"></script><script type="module" src="/scripts/index.js"></script><script>feather.replace();</script></body></html>
