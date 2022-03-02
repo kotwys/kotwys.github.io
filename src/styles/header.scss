@@ -4,6 +4,14 @@
 
 $header-height: 50px;
 
+.banner {
+  background-color: black;
+  text-align: center;
+  font-weight: 600;
+  color: white;
+  padding-block: 0.5em;
+}
+
 .header {
   display: flex;
   justify-content: center;
