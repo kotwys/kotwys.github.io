@@ -2,14 +2,17 @@
 @use 'sass:map';
 @use 'sass:math';
 
+@use './font';
+
 $factor: 1.414 !default;
 
 $sizes: (
-  sm: (-0.5),
+  sm: (-0.1),
   base: (0),
   lg: (0.5),
-  xl: (1),
+  xl: (1, 1.2),
   2xl: (2, 1.2),
+  3xl: (3, 1.2),
 );
 
 @mixin text($size) {
@@ -20,4 +23,38 @@ $sizes: (
   @if list.length($pair) > 1 {
     line-height: list.nth($pair, 2);
   }
+}
+
+h1 {
+  @include text(2xl);
+}
+
+h2 {
+  @include text(xl);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-block-start: .75em;
+  margin-block-end: .3em;
+}
+
+figcaption {
+  @include text(sm);
+}
+
+@each $size, $_ in $sizes {
+  .text-#{$size} {
+    @include text($size);
+  }
+}
+
+.text-normal {
+  @include text(base);
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  font-size: 18px;
+  font-family: Piazzolla, 'Noto Serif', 'Georgia', 'Times New Roman', 'Times', serif;
 }

@@ -132,7 +132,7 @@ $ setxkbmap -option grp:shift_toggle
 ватэмын ке но. Со пусгрупаос огазе одӥг бадӟым радъямлы пӧрмо.
 
 <figure>
-<img src="groups.jpg" alt="Улӥын англи пусгрупа +en:1, вылӥяз — ӟуч +ru:2"/>
+<img width="900" src="groups.jpg" alt="Улӥын англи пусгрупа +en:1, вылӥяз — ӟуч +ru:2"/>
 <figcaption>Улӥын англи пусгрупа +en:1, вылӥяз — ӟуч +ru:2</figcaption>
 </figure>
 

@@ -1,13 +1,33 @@
 ---
-title: Блог
+title: Коӵышгуысь гожъямъёс
 layout: page.njk
 ---
 
-<main class="container">
-  <h1 class="section__heading">Блог</h1>
-  <ul class="all-articles">
-    {% for article in collections.articles | reverse %}
-      {% include 'article-preview.njk' %}
+<main>
+  <section>
+    <div class="main-pad section-hero prose">
+      <h1 class="section-hero__heading">Гожъямъёс</h1>
+      <p class="section-hero__text">
+        Татысь бадӟымгес гожъямъёсме лыдӟемды луэ. Мылды потэ ке,
+        <a href="/feed.xml">Atom иворысъянлы</a>
+        гожтӥськемды луэ. Но солэсь но троссэ
+        <a href="https://t.me/ktwsgu">Тэлеграм каналысьтым</a> шедьтоды.
+      </p>
+      <img class="section-hero__ornament"
+        src="/assets/sleepycat.png"
+        srcset="/assets/sleepycat.png 1x, /assets/sleepycat@2x.png 2x">
+    </div>
+    {% for year, articles in collections.articles | reverse | byYear %}
+    <section class="articles main-margin">
+      <h3 class="articles__year">{{ year }}</h3>
+      <ul class="articles__list">
+        {% for article in articles %}
+        <li>
+          {% include 'article_card.njk' %}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
     {% endfor %}
-  </ul>
+  </section>
 </main>

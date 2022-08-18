@@ -1,66 +1,101 @@
 ---
 layout: page.njk
 lang: udm
+styles:
+ - /styles/article.css
+scripts:
+ - /scripts/toc.js
+prefix:
+  og: https://ogp.me/ns#
+  article: https://ogp.me/article#
+  scm: https://schema.org/
 rdf:
-  og:
+  og: 
     type: article
   article:
     author: Коӵыш Микайло
-  twitter:
+  twitter: 
     card: summary_large_image
-  # https://gist.github.com/fishchev/ed2ca15d5ffd9594d41498a4bf9ba12e
-  tg:
-    site_verification: ""
 eleventyComputed:
   rdf:
     article:
       published_time: "{{ date | isoDate }}"
     og:
       description: "{{ abstract }}"
-      image: "{{ cover.url }}"
+      image!: "{{ cover.url }}"
       image:alt: "{{ cover.alt }}"
 ---
-<!-- Mimicking teletype.in -->
-<main class="container"
-  {% if lang != 'udm' %} lang="{{ lang }}" {% endif %}
-  >
-  <div class="article prose" itemscope itemtype="https://schema.org/Article">
-    <header class="front">
-      <h1 class="front__title" itemprop="headline name">{{ title }}</h1>
-      <div class="minor">
-        <time datetime="{{ date | isoDate }}" itemprop="datePublished">{{ date | udmDate }}</time>
-        <span aria-hidden="true"> ⋅ </span>
+
+<main about="{{ site.url }}{{ page.url }}" typeof="scm:Article">
+  <header class="article-hero {% if cover %}article-hero_has-image{% endif %}">
+    <div class="main-margin">
+      <h1 class="article-hero__heading" property="scm:headline scm:name">{{ title }}</h1>
+      {% if abstract %}
+      <p property="og:description scm:abstract">{{ abstract }}</p>
+      {% endif %}
+      <p class="article-hero__meta">
+        <time property="scm:datePublished" datetime="{{ date | isoDate }}">{{ date | udmDate }}</time>
+        <span rel="scm:creator scm:author">
+          <span resource="{{ site.url }}#me" typeof="scm:Person">
+            <span property="scm:familyName">Коӵыш</span>
+            <span property="scm:givenName">Микайло</span>
+          </span>
+        </span>
         <span>{{ content | readTime }}</span>
         {% for lang in otherlangs %}
-        <span aria-hidden="true"> ⋅ </span>
-        <a rel="alternate"
-          href="{{ page.url }}{{ lang }}.html"
-          hreflang="{{ lang }}"
-          >
+        <a rel="alternate scm:workTranslation" href="{{ page.url }}{{ lang }}.html" hreflang="{{ lang }}">
           {{ lang | langname }}
         </a>
         {% endfor %}
+      </p>
+    </div>
+    {% if cover %}
+    <figure class="article-hero__image">
+      <img rel="scm:thumbnailUrl scm:image" src="{{ cover.url }}" alt="{{ cover.alt }}">
+      {% if cover.caption %}
+      <figcaption>{{ cover.caption }}</figcaption>
+      {% endif %}
+    </figure>
+    {% endif %}
+  </header>
+  {% if not disableToc %}
+  <div id="toc" class="main-margin toc">
+    <nav class="main-margin toc__nav" id="toc-content">
+      <div class="position: relative;">
+        <h2 class="toc__heading">Пуштросэз</h2>
+        <button
+          aria-controls="toc-toplevel"
+          class="toc__expand"
+          aria-expanded="true"
+          title="Пуштросэз ватоно">
+          <svg class="icon">
+            <use href="/assets/icons/sprite.svg#arrow-down-s-line"/>
+          </svg>
+        </button>
       </div>
-      {% if abstract %}
-      <p class="highlight" itemprop="abstract">{{ abstract }}</p>
+      <ul class="toc__list" id="toc-toplevel">
+      {% set headings = content | headings %}
+      {% include 'toc.njk' %}
+      {% if not disableComments %}
+        <li class="toc__item">
+          <a class="toc__link" href="#comments">Коментаръёс</a>
+        </li>
       {% endif %}
-    </header>
-    <article class="article__content">
-      {% if cover %}
-      <figure>
-        <img src="{{ cover.url }}" alt="{{ cover.alt }}">
-        {% if cover.caption %}<figcaption>{{ cover.caption }}</figcaption>{% endif %}
-      </figure>
-      {% endif %}
-      {{ content | safe }}
-    </article>
-    <section id="comments">
-      <h2>Валэктонъёс</h2>
-      <script async src="https://telegram.org/js/telegram-widget.js?15"
+      </ul>
+    </nav>
+  </div>
+  {% endif %}
+  <div class="prose prose-wide" data-track>
+    {{ content | safe }}
+  </div>
+  {% if not disableComments %}
+  <section class="main-margin">
+    <h2 id="comments" class="visually-hidden">Коментаръёс</h2>
+    <script async src="https://telegram.org/js/telegram-widget.js?15"
         data-telegram-discussion="ktwsgu"
         data-comments-limit="5"
         data-color="5F0FAE"
         ></script>
-    </section>
-  </article>
+  </section>
+  {% endif %}
 </main>

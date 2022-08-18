@@ -1,36 +1,79 @@
 ---
-title: Коӵыш Микайлолэн вотэсгердэз
+title: Коӵышгу
 layout: page.njk
 skipFooterLinks: true
+prefix:
+  foaf: http://xmlns.com/foaf/0.1/
+  scm: https://schema.org/
+rdf:
+  og:
+    description: >
+      Ӟечбур, мон Коӵыш Микайло! Мон вотэслэсьтӥсь но
+      удмуртлыкез азинтыны тыршись.
+styles:
+ - /styles/index.css
+scripts:
+ - /scripts/leaves.js
 ---
 
-<main class="container">
-  <section class="whoami">
-    <h1>Ӟечбур!<br>Мон Микайло 👋</h1>
-    <p>Вотэслэсьтӥсь, удмуртлыкез азинтӥсь но берыктӥсь.</p>
-    <h2>Герӟет</h2>
-    <ul class="social-links social-links--detailed">
-      {% for network, contact in site.contacts -%}
-      <li>
-        <a class="social-link" href="{{ contact.url }}">
-          <i aria-label="{{ network }}" data-feather="{{ contact.icon }}"></i>
-          <span>{{ contact.handle }}</span>
-        </a>
-      </li>
-      {%- endfor %}
-    </ul>
+<main>
+  <section class="main-pad aboutme" about="#me" typeof="foaf:Person scm:Person">
+    <meta property="foaf:gender scm:gender" content="male">
+    <link rel="foaf:homepage" href="{{ site.url }}">
+    <link rel="foaf:weblog" href="{{ site.url }}/articles">
+    <div class="aboutme__text">
+      <h1 class="aboutme__hello">
+        Ӟечбур,<br/>
+        Мон
+        <span property="foaf:name">
+        <span property="foaf:familyName scm:familyName">Коӵыш</span>
+        <span property="foaf:givenName scm:givenName">Микайло</span>
+        </span>
+      </h1>
+      <p>Мон вотэслэсьтӥсь но удмуртлыкез азинтыны тыршись. Татын ваньмыз мыным
+      тунскоез сярысь гожтӥсько: компьютэртодос, вотэслэсьтӥськон, кылъёс но мукетыз.</p>
+      <h2 class="visually-hidden">Монэн герӟаськон</h2>
+      <ul class="aboutme__socials socials">
+        {% for network, contact in site.contacts %}
+          <li rel="foaf:account">
+            <a class="social-link" href="{{ contact.url }}" typeof="foaf:OnlineAccount">
+              <link rel="foaf:accountServiceHomepage" href="{{ contact.homepage }}"/>
+              <svg class="icon" aria-label="{{ network }}">
+                <use href="/assets/icons/sprite.svg#{{ contact.icon }}"/>
+              </svg>
+              <span property="foaf:accountName">{{ contact.handle }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="aboutme-imagery">
+      <img class="aboutme-imagery__main"
+        src="/assets/frontpage.png"
+        srcset="/assets/frontpage.png 1x, /assets/frontpage@2x.png 2x"
+        alt="Писпу улын пукись, лумкагазэ маке гожтӥсь пилэн суредэз. Вӧзысь
+        коӵыш бадяр куаръёслэсь калленак усемзэс учке."
+        >
+    </div>
   </section>
-  <section>
-    <h2>
-      Блог
-      {% if collections.articles.length > 6 -%}
-        <a class="minor" href="/articles">ваньмыз артӥкол</a>
-      {%- endif -%}
-    </h2>
-    <ul class="all-articles">
-      {% for article in collections.articles | reverse | limit(6) %}
-        {% include 'article-preview.njk' %}
-      {% endfor %}
-    </ul>
+  <section class="main-margin">
+    <div class="articles-heading">
+      <h2 class="text-2xl">Берло гожъямъёсы</h2>
+      {% if collection.articles.length > 5 %}
+      <a class="all-articles-link" href="/articles">ваньмыз</a>
+      {% endif %}
+    </div>
+    {% for year, articles in collections.articles | reverse | limit(5) | byYear %}
+    <section class="articles">
+      <h3 class="articles__year">{{ year }}</h3>
+      <ul class="articles__list">
+        {% for article in articles %}
+        <li>
+          {% include 'article_card.njk' %}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endfor %}
   </section>
 </main>

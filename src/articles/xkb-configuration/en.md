@@ -2,6 +2,7 @@
 title: XKB Configuration Hell
 lang: en
 date: 2021-07-12
+disableComments: true
 cover:
     url: cover.jpg
     alt: A keyboard, three keys in the center say “XKB”
@@ -134,7 +135,7 @@ different layouts are in fact symbol groups laid one on top of the other, even
 if it isn't said so to the user. These symbols groups form one big layout.
 
 <figure>
-<img src="groups.jpg" alt="Underneath is English group +en:1, atop is Russian +ru:2">
+<img width="900" src="groups.jpg" alt="Underneath is English group +en:1, atop is Russian +ru:2">
 <figcaption>English and Russian groups</figcaption>
 </figure>
 

@@ -1,0 +1,99 @@
+.prose-wide >
+:is(
+  aside, blockquote, details, hr, h1, h2, h3, h4, h5, h6, p, ol, ul
+) {
+  width: 720px;
+  margin-inline: auto;
+
+  @media (max-width: 752px) {
+    width: unset;
+    margin-inline: 16px;
+  }
+}
+
+.prose a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.prose abbr[title], .prose [data-word] {
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+}
+
+.prose aside {
+  font-style: italic;
+}
+
+.prose blockquote {
+  font-style: italic;
+  padding-left: 3em;
+}
+
+.prose pre, .prose code {
+  background-color: var(--code-block);
+  border-radius: 4px;
+}
+
+.prose code {
+  padding: .1em .3em;
+}
+
+.prose pre {
+  margin-inline: auto;
+  padding: 16px;
+  overflow-x: scroll;
+  > code {
+    padding: 0;
+  }
+}
+
+@media (min-width: 752px) {
+  .prose pre {
+    width: 720px;
+  }
+}
+
+.prose-wide figure {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  justify-content: center;
+  margin-inline: auto;
+}
+
+.prose-wide figure img {
+  max-width: 100%;
+}
+
+.prose-wide figcaption {
+  box-sizing: border-box;
+  width: 0px;
+  min-width: 100%;
+  max-width: 600px;
+  margin-top: 0.5em;
+  padding-inline: 16px;
+}
+
+.prose-wide .float-right {
+  margin-left: 2em;
+  margin-right: 1em;
+  float: right;
+}
+
+.prose-wide .float-left {
+  margin-left: 1em;
+  margin-right: 2em;
+  float: left;
+}
+
+@media (min-width: 1200px) {
+  .prose-wide .float-right {
+    margin-right: calc(30vw - 360px);
+  }
+
+  .prose-wide .float-left {
+    margin-left: calc(30vw - 360px);
+  }
+}

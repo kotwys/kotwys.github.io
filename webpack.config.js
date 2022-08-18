@@ -1,11 +1,18 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const mode = process.env.NODE_ENV || 'development';
 
+const __INSIGHTS_ID__ = 'bXE8Dvt9ZSOsxSyd';
+
 module.exports = {
-  entry: './src/scripts/index.ts',
+  entry: {
+    index: './src/scripts/index.ts',
+    leaves: './src/scripts/leaves.ts',
+    toc: './src/scripts/toc.ts',
+  },
   mode,
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist', 'scripts'),
   },
   module: {
@@ -20,4 +27,10 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
+  plugins: [
+    new DefinePlugin({
+      __INSIGHTS_ID__: JSON.stringify(__INSIGHTS_ID__),
+      __DEVELOPMENT__: JSON.stringify(mode === 'development'),
+    }),
+  ],
 };

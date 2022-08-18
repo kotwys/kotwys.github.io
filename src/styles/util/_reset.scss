@@ -1,8 +1,10 @@
 @mixin link {
+  text-decoration: unset;
+  border: none;
+
   &, &:link, &:hover, &:active, &:visited {
     color: unset;
-    text-decoration: unset;
-    border: none;
+    @content;
   }
 }
 
