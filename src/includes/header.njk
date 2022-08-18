@@ -1,17 +1,21 @@
-<header class="header">
-  <a class="logo"
-    href="{{ '/' | url }}"
-    aria-label="Дорбаме"
-    {% if page.url == '/' %} aria-current="page" {% endif %}
-    >
-    {% include '../assets/logo-fill.svg' %}
+<header class="header main-pad">
+  <a class="header__logo" href="/" aria-label="Дорбаме">
+    <img src="/assets/logo.svg" width="24"/>
   </a>
-  <nav class="menu">
-    {% include 'menu.njk' %}
-  </nav>
-  <button class="theme-switch needs-js header__item rounded"
-    title="Пеймыт тэмаез пуктоно"
-    >
-    <i data-feather="moon"></i>
-  </button>
+  <div class="header-drawer">
+    <button
+      class="header-drawer__button init"
+      title="Менюез усьтоно"
+      aria-controls="header-drawer"
+      aria-expanded="false"
+      >
+      <svg class="icon">
+        <use id="header-drawer-icon" href="/assets/icons/sprite.svg#menu-3-line"/>
+      </svg>
+    </button>
+    <div class="header-drawer__content" id="header-drawer">
+      {% include "menu.njk" %}
+    </div>
+  </div>
+  <div class="header__progress"></div>
 </header>

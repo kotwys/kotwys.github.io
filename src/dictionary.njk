@@ -1,0 +1,34 @@
+---
+title: Кыллюкам
+layout: page.njk
+rdf:
+  og:
+    description: Малпам выль кылъёсын будылӥсь лыдметэ
+    image!: /assets/dictionary.png
+  twitter: { card: summary_large_image }
+---
+
+<main class="main-flow prose">
+  <h1 class="heading">Кыллюкам</h1>
+  <p>
+  Удмурт кылмы йыгмыт мед азинскоз шуыса, со пушкы туж трос выль кылъёс
+  пыӵаны кулэ. Мон малпатэк ӟуч кылъёсты пыртанлэн дурбасьтӥсез ӧвӧл, соин
+  тани кӧня ке малпам кылъёсме сётӥсько.
+  </p>
+  <p>
+  Маиз-соиз пумысен тэкшеремды потэ ке, мон туж шумпото (я, со та лыдметлэн
+  азьмугез ик луэ). Утчанэн-янгышанэн гинэ умойзэ шедьтомы.
+  </p>
+  <hr/>
+  <dl>
+    {% for word in words | selectattr('date') | sort(false, false, 'initial') %}
+    <dt>{{ word.initial }}</dt>
+    <dd>
+      {{ word.def }}
+      {% if word.link %}
+      [<a href="{{ word.link }}">ошмесэз</a>]
+      {% endif %}
+    </dd>
+    {% endfor %}
+  </dl>
+</main>

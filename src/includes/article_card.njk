@@ -1,0 +1,22 @@
+<article class="article-card" about="{{ site.url }}{{ article.url }}" typeof="scm:Article">
+  <link rel="scm:creator scm:author" href="https://kotwys.github.io#me">
+  <div class="article-card__content">
+    <h4 class="article-card__heading" property="scm:headline scm:name">
+      <a class="article-card__link hollow-link" href="{{ article.url }}">{{ article.data.title }}</a>
+    </h4>
+    <p class="article-card__meta">
+      <time
+        property="scm:datePublished"
+        datetime="{{ article.data.date | isoDate }}"
+        >
+        {{ article.data.date | udmDate }}
+      </time>
+      <span>{{ article.templateContent | readTime }}</span>
+    </p>
+  </div>
+  <img class="article-card__image"
+    rel="scm:thumbnailUrl scm:image"
+    src="{{ article.url }}{{ article.data.cover.url }}"
+    alt="{{ article.data.cover.alt }}"
+    >
+</article>

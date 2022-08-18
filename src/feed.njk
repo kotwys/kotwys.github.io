@@ -1,6 +1,6 @@
 ---
 permalink: feed.xml
-title: Коӵыш Микайлолэн блогез
+title: Коӵышгуысь гожъямъёс
 lang: udm
 ---
 <?xml version="1.0" encoding="utf-8"?>
@@ -12,13 +12,13 @@ lang: udm
   <link href="/articles"/>
   <link rel="self" href="/feed.xml" type="application/atom+xml"/>
   <author>
-    <name>Коӵыш Микайло</name>
+    <name>{{ site.author }}</name>
   </author>
   <updated>{{ site.buildDate | isoDate }}</updated>
   <id>{{ site.url }}</id>
-  <icon>/assets/logo.png</icon>
+  <icon>/assets/logo_large.png</icon>
 
-  {% for article in collections.articles %}
+  {% for article in collections.articles | reverse %}
   <entry xml:base="{{ site.url }}{{ article.url }}">
     <title>{{ article.data.title }}</title>
     <link href="./." type="text/html"/>

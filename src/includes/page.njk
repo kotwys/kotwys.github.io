@@ -1,35 +1,50 @@
 ---
+prefix:
+  og: https://ogp.me/ns#
 eleventyComputed:
   rdf:
     og:
       title: "{{ title }}"
+      url: "{{ site.url }}{{ page.url }}"
 ---
 <!DOCTYPE html>
-<html lang="udm">
+<html
+  lang="udm"
+  dir="ltr"
+  {% if prefix %}prefix="{% mkPrefix prefix %}"{% endif %}>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
-  {% rdfmeta rdf %}
+  {% if rdf.og.description %}
+  <meta name="description" content="{{ rdf.og.description }}">
+  {% endif %}
+  {% mkRdf rdf %}
   <link rel="alternate"
     href="{{ '/feed.xml' | url }}"
     type="application/atom+xml"
-    title="Коӵыш Микайло">
-  <link rel="icon" href="/favicon.png">
+    title="Коӵышгу — Гожъямъёс">
+  <link rel="icon" href="{{ '/favicon.png' | url }}">
+  <link rel="stylesheet" href="{{ '/styles/light.css' | url }}">
   <link rel="stylesheet" href="{{ '/styles/main.css' | url }}">
+  {% for style in styles %}
+  <link rel="stylesheet" href="{{ style | url }}">
+  {% endfor %}
+  {% if features and 'math' in features %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.19/dist/katex.min.css">
+  {% endif %}
+  <link rel="me" href="https://twitter.com/kotwys">
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-  <meta name="theme-color" content="#5b0082">
+  <meta name="theme-color" content="#f0d5a6">
 </head>
 <body>
   {% include 'header.njk' %}
   {{ content | safe }}
   {% include 'footer.njk' %}
-  <script src="https://unpkg.com/feather-icons"></script>
   <script type="module" src="{{ '/scripts/index.js' | url }}"></script>
-  <script>
-    feather.replace();
-  </script>
+  {% for script in scripts %}
+  <script src="{{ script | url }}"></script>
+  {% endfor %}
 </body>
 </html>

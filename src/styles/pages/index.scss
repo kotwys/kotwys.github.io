@@ -1,0 +1,89 @@
+@use '../util/type';
+
+.aboutme {
+  position: relative;
+  padding: {
+    top: 50px;
+    bottom: 150px;
+  };
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary),
+    var(--color-primary-darker)
+  );
+  overflow-x: hidden;
+}
+
+.aboutme__text {
+  position: relative;
+  z-index: 10;
+}
+
+.aboutme__hello {
+  @include type.text(3xl);
+  margin-top: 0;
+  margin-bottom: .75em;
+}
+
+.aboutme__socials {
+  margin-top: 32px;
+}
+
+.aboutme-imagery {
+  position: absolute;
+  bottom: 0;
+  right: -200px;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.aboutme-imagery__main {
+  height: 400px;
+  mix-blend-mode: multiply;
+}
+
+@media (min-width: 390px) {
+  .aboutme-imagery {
+    right: calc(50vw - 390px);
+  }
+}
+
+@media (min-width: 710px) {
+  .aboutme {
+    padding-bottom: 80px;
+  }
+
+  .aboutme__text {
+    padding-right: 180px;
+  }
+
+  .aboutme__socials {
+    grid-auto-flow: column;
+  }
+
+  .aboutme__socials li:first-child {
+    margin-left: -12px;
+  }
+
+  .aboutme-imagery {
+    top: 0;
+    right: calc(50vw - 600px);
+  }
+}
+
+.aboutme-leaf {
+  width: 40px;
+  height: 40px;
+  background-image: url('/assets/leaves.png');
+  background-size: 100% auto;
+  position: absolute;
+
+  &-1 {
+    background-position: 0 0;
+  }
+
+  &-2 {
+    background-position: 0 40px;
+  }
+}

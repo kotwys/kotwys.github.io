@@ -3,13 +3,18 @@
   date: 2020
   def: веб-браузер
 - initial: нюртэт
+  date: 2021
   def: клавиша
 - initial: нюртэтпул
   date: 2021
   def: клавиатура
+- initial: шудонӧр
+  link: https://twitter.com/kotwys/status/1337010881922797569
+  date: 2021
+  def: геймплей
 - initial: могӟонтэмлык
   date: 2021
-  def: accessibility
+  def: доступность (accessibility)
 - initial: валэктон
   def: спецификация
 - initial: вачекуспаськись

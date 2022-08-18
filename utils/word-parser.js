@@ -13,7 +13,6 @@ const inline = (dictionary) => function (state, silent) {
       let [form, initial] = match[1].split('|');
       initial = initial || form.toLowerCase();
       form += match[2];
-      console.log('word:', initial, form, pos);
 
       const token = state.push('word', 'word', 0);
       token.tag = 'span';

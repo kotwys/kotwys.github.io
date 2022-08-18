@@ -3,40 +3,18 @@ const yaml = require('js-yaml');
 const { URL } = require('url');
 const htmlmin = require('html-minifier');
 const xmlmin = require('minify-xml');
+const { parse: htmlParse } = require('node-html-parser');
 const readingTime = require('reading-time');
+const escapeHtml = require('escape-html');
 
 const IntlPolyfill = require('intl');
 require('./locale/udm');
 
 const site = require('./src/data/site');
 
-const relative = function (url) {
-  return new URL(url, site.url + this.page.url).href;
+const relative = function (url, base) {
+  return new URL(url, site.url + base).href;
 }
-
-const flattenRdf = (rdf) => {
-  const aux = (path, o) => {
-    if (Array.isArray(o)) {
-      return o.map(v => [path, v]);
-    }
-    if (typeof o === 'object') {
-      return Object.entries(o)
-        .flatMap(([ key, value ]) =>
-          aux(path.concat(key), value)
-        );
-    }
-    return [[path, o]];
-  };
-
-  return aux([], rdf);
-};
-
-const rdfTransform = (property) => {
-  return {
-    'og:image': relative,
-    'twitter:image': relative,
-  }[property] ?? (v => v);
-};
 
 module.exports = (config) => {
   config.setDataDeepMerge(true);
@@ -48,6 +26,7 @@ module.exports = (config) => {
     html: true,
   };
   const md = require('markdown-it')(mdOptions)
+    .use(require('markdown-it-anchor'))
     .use(require('markdown-it-texmath'), {
       engine: require('katex'),
     })
@@ -58,25 +37,69 @@ module.exports = (config) => {
     });
   
   config.setLibrary('md', md);
+  config.addDataExtension('yml', contents => yaml.load(contents));
 
   config.addPassthroughCopy('src/assets');
+  config.addPassthroughCopy('src/fonts');
   config.addPassthroughCopy('src/**/*.(html|png|jpg)');
 
   config.addCollection('articles', api =>
     api.getFilteredByGlob('src/articles/**/index.md')
   );
 
-  config.addShortcode('rdfmeta', function (data) {
-    return flattenRdf(data)
-      .map(([path, value]) => {
-        const property = path.join(':');
-        const content = rdfTransform(property).call(this, value);
-        return `<meta property="${property}" content="${content}">`;
-      })
-      .join('\n');
+  config.addShortcode('relative', relative);
+
+  config.addShortcode('mkMeta', function (meta) {
+    if (!meta)
+      return '';
+
+    return Object.entries(meta).map(([key, value]) =>
+      `<meta name="${escapeHtml(key)}" content="${escapeHtml(value)}">`
+    ).join('\n');
   });
 
-  config.addFilter('relative', relative);
+  config.addShortcode('mkRdf', function (rdf) {
+    if (!rdf)
+      return '';
+
+    const pairs = [];
+    const addProperty = (prefix, prop, value) => {
+      // Transform properties marked with ! to an absolute URL
+      if (prop.endsWith('!')) {
+        prop = prop.slice(0, -1);
+        value = relative(value, this.page.url);
+      }
+      const qualified = (prefix ? (prefix + ':') : '') + prop;
+      return [qualified, value];
+    };
+    for (const key in rdf) {
+      if (typeof rdf[key] === "object")
+        pairs.push(...Object.entries(rdf[key])
+          .map(([prop, value]) => addProperty(key, prop, value))
+        );
+      else
+        pairs.push(addProperty('', key, rdf[key]));
+    }
+
+    return pairs.map(([key, value]) => 
+      `<meta property="${escapeHtml(key)}" content="${escapeHtml(value)}">`
+    ).join('\n');
+  });
+
+  config.addShortcode('mkPrefix', prefix => 
+    Object.entries(prefix).map(([k, v]) => `${k}: ${v}`).join(' ')
+  );
+
+  config.addFilter('headings', content => {
+    const document = htmlParse(content);
+    return document
+      .querySelectorAll('h1, h2, h3, h4, h5, h6')
+      .map((el) => ({
+        id: el.id,
+        level: parseInt(el.tagName[1]),
+        content: el.textContent,
+      }));
+  });
 
   config.addFilter('isoDate', date => date.toISOString());
   config.addFilter('udmDate', date =>
@@ -100,6 +123,16 @@ module.exports = (config) => {
   });
 
   config.addFilter('limit', (val, n) => val.slice(0, n));
+
+  config.addFilter('byYear', (arr) => {
+    return arr.reduce((all, v) => {
+      const year = v.date.getFullYear();
+      if (!all.has(year))
+        all.set(year, []);
+      all.get(year).push(v);
+      return all;
+    }, new Map());
+  });
 
   config.addTransform('htmlmin', function (content, outputPath) {
     if (outputPath && outputPath.endsWith('.html')) {

@@ -1,0 +1,36 @@
+{# Black magic going on #}
+{% set firstOnLevel = true %}
+{% set lastHeading = null %}
+{% for heading in headings %}
+  {% if lastHeading %}
+    {% set d = lastHeading.level - heading.level %}
+    {% if d < 0 %}
+      <button
+        class="toc__expand"
+        aria-controls="toc-{{ lastHeading.id }}"
+        aria-expanded="true"
+        title="«{{ lastHeading.content }}» люкетэз пыр-поч"
+        >
+        <svg class="icon">
+          <use href="/assets/icons/sprite.svg#arrow-down-s-line"/>
+        </svg>
+      </button>
+      <ul id="toc-{{ lastHeading.id }}" class="toc__list">
+      {% set firstOnLevel = true %}
+    {% elif d > 0 %}
+      {% for _ in range(-d) %}
+        </li></ul></li>
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+
+  {% if not firstOnLevel %}</li>{% endif %}
+  <li class="toc__item">
+    <a class="toc__link" href="#{{ heading.id }}">{{ heading.content }}</a>
+  {% set lastHeading = heading %}
+  {% set firstOnLevel = false %}
+{% endfor %}
+</li>
+{% for _ in range(lastHeading.level-2) %}
+</ul></li>
+{% endfor %}
