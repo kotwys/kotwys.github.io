@@ -41,6 +41,7 @@ module.exports = (config) => {
 
   config.addPassthroughCopy('src/assets');
   config.addPassthroughCopy('src/fonts');
+  config.addPassthroughCopy('src/sw.js');
   config.addPassthroughCopy('src/**/*.(html|png|jpg)');
 
   config.addCollection('articles', api =>
