@@ -26,68 +26,81 @@ eleventyComputed:
       image:alt: "{{ cover.alt }}"
 ---
 
-<main about="{{ site.url }}{{ page.url }}" typeof="scm:Article">
-  <header class="article-hero {% if cover %}article-hero_has-image{% endif %}">
-    <div class="main-margin">
-      <h1 class="article-hero__heading" property="scm:headline scm:name">{{ title }}</h1>
-      {% if abstract %}
-      <p property="og:description scm:abstract">{{ abstract }}</p>
-      {% endif %}
-      <p class="article-hero__meta">
-        <time property="scm:datePublished" datetime="{{ date | isoDate }}">{{ date | udmDate }}</time>
-        <span rel="scm:creator scm:author">
-          <span resource="{{ site.url }}#me" typeof="scm:Person">
-            <span property="scm:familyName">Коӵыш</span>
-            <span property="scm:givenName">Микайло</span>
+<main>
+  <article about="{{ site.url }}{{ page.url }}" typeof="scm:Article">
+    <header class="article-hero {% if cover %}article-hero_has-image{% endif %}">
+      <div class="main-margin">
+        <h1
+          class="article-hero__heading"
+          property="scm:headline scm:name">
+          {{ title }}
+        </h1>
+        {% if abstract %}
+        <p property="scm:abstract">{{ abstract }}</p>
+        {% endif %}
+        <p class="article-hero__meta">
+          <time
+            property="scm:datePublished"
+            datetime="{{ date | isoDate }}">
+            {{ date | udmDate }}
+          </time>
+          <span rel="scm:creator scm:author">
+            <span resource="{{ site.url }}#me" typeof="scm:Person">
+              <span property="scm:familyName">Коӵыш</span>
+              <span property="scm:givenName">Микайло</span>
+            </span>
           </span>
-        </span>
-        <span>{{ content | readTime }}</span>
-        {% for lang in otherlangs %}
-        <a rel="alternate scm:workTranslation" href="{{ page.url }}{{ lang }}.html" hreflang="{{ lang }}">
-          {{ lang | langname }}
-        </a>
-        {% endfor %}
-      </p>
-    </div>
-    {% if cover %}
-    <figure class="article-hero__image">
-      <img rel="scm:thumbnailUrl scm:image" src="{{ cover.url }}" alt="{{ cover.alt }}">
-      {% if cover.caption %}
-      <figcaption>{{ cover.caption }}</figcaption>
-      {% endif %}
-    </figure>
-    {% endif %}
-  </header>
-  {% if not disableToc %}
-  <div id="toc" class="main-margin toc">
-    <nav class="main-margin toc__nav" id="toc-content">
-      <div class="position: relative;">
-        <h2 class="toc__heading">Пуштросэз</h2>
-        <button
-          aria-controls="toc-toplevel"
-          class="toc__expand"
-          aria-expanded="true"
-          title="Пуштросэз ватоно">
-          <svg class="icon">
-            <use href="/assets/icons/sprite.svg#arrow-down-s-line"/>
-          </svg>
-        </button>
+          <span>{{ content | readTime }}</span>
+          {% for lang in otherlangs %}
+          <a
+            rel="alternate scm:workTranslation"
+            href="{{ page.url }}{{ lang }}.html"
+            hreflang="{{ lang }}">
+            {{ lang | langname }}
+          </a>
+          {% endfor %}
+        </p>
       </div>
-      <ul class="toc__list" id="toc-toplevel">
-      {% set headings = content | headings %}
-      {% include 'toc.njk' %}
-      {% if not disableComments %}
-        <li class="toc__item">
-          <a class="toc__link" href="#comments">Коментаръёс</a>
-        </li>
+      {% if cover %}
+      <figure class="article-hero__image">
+        <img rel="scm:thumbnailUrl scm:image" src="{{ cover.url }}" alt="{{ cover.alt }}">
+        {% if cover.caption %}
+        <figcaption>{{ cover.caption }}</figcaption>
+        {% endif %}
+      </figure>
       {% endif %}
-      </ul>
-    </nav>
-  </div>
-  {% endif %}
-  <div class="prose prose-wide" data-track>
-    {{ content | safe }}
-  </div>
+    </header>
+    {% if not disableToc %}
+    <div id="toc" class="main-margin toc">
+      <nav class="main-margin toc__nav" id="toc-content">
+        <div class="position: relative;">
+          <h2 class="toc__heading">Пуштросэз</h2>
+          <button
+            aria-controls="toc-toplevel"
+            class="toc__expand"
+            aria-expanded="true"
+            title="Пуштросэз ватоно">
+            <svg class="icon">
+              <use href="/assets/icons/sprite.svg#arrow-down-s-line"/>
+            </svg>
+          </button>
+        </div>
+        <ul class="toc__list" id="toc-toplevel">
+        {% set headings = content | headings %}
+        {% include 'toc.njk' %}
+        {% if not disableComments %}
+          <li class="toc__item">
+            <a class="toc__link" href="#comments">Коментаръёс</a>
+          </li>
+        {% endif %}
+        </ul>
+      </nav>
+    </div>
+    {% endif %}
+    <div class="prose prose-wide" data-track>
+      {{ content | safe }}
+    </div>
+  </article>
   {% if not disableComments %}
   <section class="main-margin">
     <h2 id="comments" class="visually-hidden">Коментаръёс</h2>
