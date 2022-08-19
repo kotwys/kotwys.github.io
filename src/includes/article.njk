@@ -28,7 +28,7 @@ eleventyComputed:
 
 <main>
   <article about="{{ site.url }}{{ page.url }}" typeof="scm:Article">
-    <header class="article-hero {% if cover %}article-hero_has-image{% endif %}">
+    <header class="article-hero {% if cover %}article-hero_has-image{% endif %} prose">
       <div class="main-margin">
         <h1
           class="article-hero__heading"
@@ -97,7 +97,7 @@ eleventyComputed:
       </nav>
     </div>
     {% endif %}
-    <div class="prose prose-wide" data-track>
+    <div class="article__content prose prose-wide" data-track>
       {{ content | safe }}
     </div>
   </article>

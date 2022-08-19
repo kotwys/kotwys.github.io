@@ -16,6 +16,14 @@ const relative = function (url, base) {
   return new URL(url, site.url + base).href;
 }
 
+const optionalAbsolute = function (url, base) {
+  if (/^(https?:)?\/\//.test(url)) {
+    return url;
+  }
+
+  return base + url;
+}
+
 module.exports = (config) => {
   config.setDataDeepMerge(true);
 
@@ -30,11 +38,18 @@ module.exports = (config) => {
     .use(require('markdown-it-texmath'), {
       engine: require('katex'),
     })
+    .use(require('markdown-it-footnote'))
     .use(require('./utils/word-parser'), {
       dictionary: Object.fromEntries(
         dictionary.map(({ initial,def }) => [initial, def])
       ),
     });
+  
+  md.renderer.rules.footnote_block_open = () => (
+    '<section class="main-margin">' +
+    '<h2>Валэктонъёс</h2>' +
+    '<ol class="footnotes-list">'
+  );
   
   config.setLibrary('md', md);
   config.addDataExtension('yml', contents => yaml.load(contents));
@@ -90,6 +105,8 @@ module.exports = (config) => {
   config.addShortcode('mkPrefix', prefix => 
     Object.entries(prefix).map(([k, v]) => `${k}: ${v}`).join(' ')
   );
+
+  config.addFilter('optionalAbsolute', optionalAbsolute);
 
   config.addFilter('headings', content => {
     const document = htmlParse(content);

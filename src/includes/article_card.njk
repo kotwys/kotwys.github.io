@@ -16,7 +16,7 @@
   </div>
   <img class="article-card__image"
     rel="scm:thumbnailUrl scm:image"
-    src="{{ article.url }}{{ article.data.cover.url }}"
+    src="{{ article.data.cover.url | optionalAbsolute(article.url) }}"
     alt="{{ article.data.cover.alt }}"
     >
 </article>
