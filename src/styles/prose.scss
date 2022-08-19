@@ -11,6 +11,11 @@
   }
 }
 
+.prose-wide table {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
 .prose a {
   color: var(--color-accent);
   text-decoration: none;
@@ -20,6 +25,19 @@
 .prose abbr[title], .prose [data-word] {
   text-decoration: none;
   border-bottom: 1px dotted currentColor;
+}
+
+.prose .collage-row {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 16px;
+  grid-auto-columns: 1fr;
+}
+
+@media (max-width: 680px) {
+  .prose .collage-row {
+    grid-auto-flow: row;
+  }
 }
 
 .prose aside {
@@ -41,7 +59,6 @@
 }
 
 .prose pre {
-  margin-inline: auto;
   padding: 16px;
   overflow-x: scroll;
   > code {
@@ -49,8 +66,12 @@
   }
 }
 
+.prose-wide pre {
+  margin-inline: auto;
+}
+
 @media (min-width: 752px) {
-  .prose pre {
+  .prose-wide pre {
     width: 720px;
   }
 }
