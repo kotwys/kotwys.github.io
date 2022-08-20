@@ -47,7 +47,7 @@ module.exports = (config) => {
   
   md.renderer.rules.footnote_block_open = () => (
     '<section class="main-margin">' +
-    '<h2>Валэктонъёс</h2>' +
+    '<h2 id="references">Валэктонъёс</h2>' +
     '<ol class="footnotes-list">'
   );
   
