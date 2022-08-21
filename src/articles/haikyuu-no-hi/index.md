@@ -1,6 +1,7 @@
 ---
 title: Haikyū no Hi
 abstract: «Haikyū!!» анимеез учкем берам мылкыдме пичияк верасько.
+tgDiscussion: ktwsgu/111
 date: 2022-08-19
 cover:
   url: https://i.imgur.com/1wgkLmj.jpg
