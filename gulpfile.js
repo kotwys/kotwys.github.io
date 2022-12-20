@@ -43,6 +43,7 @@ exports.icons = () => src('node_modules/remixicon/**/*.svg')
     'twitter-line',
     'github-line',
     'send-plane-2-line',
+    'mastodon-line',
     'menu-3-line',
     'close-line',
     'arrow-down-s-line'

@@ -38,10 +38,14 @@ scripts:
           <li rel="foaf:account">
             <a class="social-link" href="{{ contact.url }}" typeof="foaf:OnlineAccount">
               <link rel="foaf:accountServiceHomepage" href="{{ contact.homepage }}"/>
-              <svg class="icon" aria-label="{{ network }}">
-                <use href="/assets/icons/sprite.svg#{{ contact.icon }}"/>
-              </svg>
-              <span property="foaf:accountName">{{ contact.handle }}</span>
+              <span class="icon" title="{{ network }}">
+                <svg class="icon">
+                  <use href="/assets/icons/sprite.svg#{{ contact.icon }}"/>
+                </svg>
+              </span>
+              {% if contact.handle %}
+                <span property="foaf:accountName">{{ contact.handle }}</span>
+              {% endif %}
             </a>
           </li>
         {% endfor %}

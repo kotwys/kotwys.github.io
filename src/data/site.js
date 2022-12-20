@@ -22,6 +22,11 @@ module.exports = {
       handle: '@kotwys',
       url: 'https://github.com/kotwys',
     },
+    'Mastodon': {
+      icon: 'mastodon-line',
+      homepage: 'https://mastodon.social',
+      url: 'https://mastodon.social/@kotwys',
+    },
   },
 
   links: [

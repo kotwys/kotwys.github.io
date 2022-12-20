@@ -14,10 +14,14 @@
       {% for network, contact in site.contacts %}
         <li>
           <a class="social-link" href="{{ contact.url }}">
-            <svg class="icon" aria-label="{{ network }}">
-              <use href="/assets/icons/sprite.svg#{{ contact.icon }}"/>
-            </svg>
-            <span>{{ contact.handle }}</span>
+            <span class="icon" title="{{ network }}">
+              <svg class="icon">
+                <use href="/assets/icons/sprite.svg#{{ contact.icon }}"/>
+              </svg>
+            </span>
+            {% if contact.handle %}
+              <span>{{ contact.handle }}</span>
+            {% endif %}
           </a>
         </li>
       {% endfor %}
