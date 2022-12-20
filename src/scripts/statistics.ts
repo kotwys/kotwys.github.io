@@ -1,6 +1,6 @@
 import { init, track, trackPages } from 'insights-js'
 
-!__DEVELOPMENT__ && init(__INSIGHTS_ID__);
+!__DEVELOPMENT__ && !localStorage.NO_STATS && init(__INSIGHTS_ID__);
 const { stop } = trackPages();
 
 let readTimes = 0;
