@@ -106,6 +106,12 @@ module.exports = (config) => {
     Object.entries(prefix).map(([k, v]) => `${k}: ${v}`).join(' ')
   );
 
+  config.addFilter('md', (content, inline) => 
+    inline
+      ? md.renderInline(content) 
+      : md.render(content) 
+  );
+
   config.addFilter('optionalAbsolute', optionalAbsolute);
 
   config.addFilter('headings', content => {
