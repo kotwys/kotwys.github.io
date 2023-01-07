@@ -1,4 +1,4 @@
-import { track } from './statistics';
+import './statistics';
 
 document.querySelectorAll('.init').forEach(el => {
   el.classList.remove('init');
@@ -10,25 +10,9 @@ import('./header').then(({ stickyHeader, drawer }) => {
   drawer(header);
 });
 
-/*
-   The website originally contained a database at version 1. It had
-   2 object stores: `words` and `caches`
-          key
-   words: hash  word        def
-   cache: store lastUpdated
- */
-indexedDB.deleteDatabase('kotwys-github-io')
-  .addEventListener('success', () => track({
-    id: 'deleteded-old-indexeddb'
-  }));
-
-if ('serviceWorker' in navigator)
-  navigator.serviceWorker.getRegistration('/sw.js')
-    .then(async (registration) => {
-      if (registration) {
-        await registration.unregister();
-        track({
-          id: 'removed-service-worker',
-        });
-      }
-    });
+// Animate logo on first visit
+if (!sessionStorage.getItem('visited')) {
+  const logo = document.querySelector('.header__logo img');
+  logo && logo.classList.add('header__logo_animate');
+  sessionStorage.setItem('visited', 'true');
+}

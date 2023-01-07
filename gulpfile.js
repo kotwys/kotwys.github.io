@@ -22,6 +22,7 @@ const STYLES_ENTRY_POINTS = [
   'src/styles/pages/index.scss',
   'src/styles/pages/article.scss',
   'src/styles/themes/light.scss',
+  'src/styles/themes/dark.scss',
 ];
 
 const styles = series(

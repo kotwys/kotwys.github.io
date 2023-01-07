@@ -2,6 +2,7 @@
 @use 'util/type';
 
 @use 'prose';
+@use 'logo';
 
 body {
   margin: 0;
@@ -258,7 +259,14 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-block-end: 18px;
+  margin-block: 18px;
+  transition: 0.2s box-shadow;
+}
+
+@media (hover: none) {
+  .article-card:hover {
+    box-shadow: 0 15px 10px var(--elevate);
+  }
 }
 
 .article-card__image {
@@ -303,9 +311,9 @@ body {
 /* FOOTER */
 .footer {
   display: grid;
-  row-gap: 16px;
+  gap: 16px;
   padding-bottom: 32px;
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
   margin-top: 32px;
 }
 
@@ -320,6 +328,14 @@ body {
   }
 }
 
+.hero {
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+}
+
 /* SECTIONS */
 .section-hero {
   position: relative;
@@ -328,7 +344,6 @@ body {
     bottom: 64px;
   };
   margin-bottom: 64px;
-  background-color: var(--color-primary);
 }
 
 .section-hero__heading {

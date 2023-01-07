@@ -1,6 +1,32 @@
 const toc = document.getElementById('toc');
 const tocContent = document.getElementById('toc-content');
-const mql = matchMedia('(min-width: 1120px)');
+const headings = Array.from(tocContent.querySelectorAll('a[href]'));
+
+let currentHeading: Element = null;
+const followLink = (link: string) => document.getElementById(link.slice(1));
+const findLink = (id: string) => headings.findIndex(
+  (el) => el.getAttribute('href').slice(1) === id
+);
+const setCurrent = (el: Element, current: boolean) => {
+  el.classList.toggle('toc__link_current', current);
+  el.ariaCurrent = current ? 'location' : 'false';
+};
+const headingCrossed: IntersectionObserverCallback = (entries) => {
+  for (const entry of entries) {
+    if (entry.boundingClientRect.y <= 0) {
+      const idx = findLink(entry.target.id);
+      currentHeading && setCurrent(currentHeading, false)
+      currentHeading = headings[idx];
+      currentHeading && setCurrent(currentHeading, true);
+    }
+  }
+};
+const headIo = new IntersectionObserver(headingCrossed, {
+  threshold: [0, 1]
+});
+headings
+  .map((el) => followLink(el.getAttribute('href')))
+  .forEach((el) => headIo.observe(el));
 
 toc.querySelectorAll('.toc__expand').forEach((btn) => {
   const controls = document.getElementById(
@@ -16,7 +42,6 @@ toc.querySelectorAll('.toc__expand').forEach((btn) => {
 
 let tocHeight = tocContent.offsetHeight + 400;
 const intersected: IntersectionObserverCallback = (entries) => {
-  console.log(entries);
   const shouldHide = entries.some(entry =>
     entry.isIntersecting &&
       (entry.intersectionRect.x < 270)
@@ -32,6 +57,8 @@ const possibleIntersections = document.querySelectorAll(
   '.prose figure img,' +
   '.prose table tr'
 );
+
+const mql = matchMedia('(min-width: 1120px)');
 
 function mediaChanged() {
   if (mql.matches) {

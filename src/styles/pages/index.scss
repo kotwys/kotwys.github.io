@@ -6,12 +6,7 @@
     top: 50px;
     bottom: 150px;
   };
-  background: linear-gradient(
-    to bottom,
-    var(--color-primary),
-    var(--color-primary-darker)
-  );
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .aboutme__text {
@@ -31,21 +26,20 @@
 
 .aboutme-imagery {
   position: absolute;
-  bottom: 0;
-  right: -200px;
+  bottom: -150px;
+  right: -160px;
   pointer-events: none;
   user-select: none;
-  overflow: hidden;
 }
 
 .aboutme-imagery__main {
-  height: 400px;
-  mix-blend-mode: multiply;
+  height: 512px;
+  mix-blend-mode: overlay;
 }
 
-@media (min-width: 390px) {
+@media (min-width: 350px) {
   .aboutme-imagery {
-    right: calc(50vw - 390px);
+    right: calc(50vw - 270px);
   }
 }
 
@@ -68,22 +62,6 @@
 
   .aboutme-imagery {
     top: 0;
-    right: calc(50vw - 600px);
-  }
-}
-
-.aboutme-leaf {
-  width: 40px;
-  height: 40px;
-  background-image: url('/assets/leaves.png');
-  background-size: 100% auto;
-  position: absolute;
-
-  &-1 {
-    background-position: 0 0;
-  }
-
-  &-2 {
-    background-position: 0 40px;
+    right: calc(44vw - 492px);
   }
 }

@@ -8,30 +8,29 @@ prefix:
 rdf:
   og:
     description: >
-      Ӟечбур, мон Коӵыш Микайло! Мон вотэслэсьтӥсь но
-      удмуртлыкез азинтыны тыршись.
+      Ӟечбур, мон Коӵыш Микайло! Мон компьютэртодослы дышетскись но
+      удмурт кыл понна тыршись.
 styles:
  - /styles/index.css
-scripts:
- - /scripts/leaves.js
 ---
 
 <main>
-  <section class="main-pad aboutme" about="#me" typeof="foaf:Person scm:Person">
+  <section class="hero theme-hero main-pad aboutme" about="#me" typeof="foaf:Person scm:Person">
     <meta property="foaf:gender scm:gender" content="male">
     <link rel="foaf:homepage" href="{{ site.url }}">
     <link rel="foaf:weblog" href="{{ site.url }}/articles">
     <div class="aboutme__text">
       <h1 class="aboutme__hello">
         Ӟечбур,<br/>
-        Мон
+        мон
         <span property="foaf:name">
         <span property="foaf:familyName scm:familyName">Коӵыш</span>
         <span property="foaf:givenName scm:givenName">Микайло</span>
         </span>
       </h1>
-      <p>Мон вотэслэсьтӥсь но удмуртлыкез азинтыны тыршись. Татын ваньмыз мыным
-      тунскоез сярысь гожтӥсько: компьютэртодос, вотэслэсьтӥськон, кылъёс но мукетыз.</p>
+      <p>Мон компьютэртодослы дышетскись но удмурт кыл понна тыршись. Мыным
+      вотэслэсьтон, матэматӥк, кылъёс, Нипоншаер но пичильтык суредъяськон
+      тунсыко пото, со сярысьгес ик татын гожъясько.</p>
       <h2 class="visually-hidden">Монэн герӟаськон</h2>
       <ul class="aboutme__socials socials">
         {% for network, contact in site.contacts %}
@@ -52,12 +51,16 @@ scripts:
       </ul>
     </div>
     <div class="aboutme-imagery">
-      <img class="aboutme-imagery__main"
-        src="/assets/frontpage.png"
-        srcset="/assets/frontpage.png 1x, /assets/frontpage@2x.png 2x"
-        alt="Писпу улын пукись, лумкагазэ маке гожтӥсь пилэн суредэз. Вӧзысь
-        коӵыш бадяр куаръёслэсь калленак усемзэс учке."
-        >
+      <picture>
+        <source
+          srcset="/assets/frontpage.webp, /assets/frontpage@2x.webp 2x"
+          type="image/webp">
+        <img
+          class="aboutme-imagery__main"
+          src="/assets/frontpage.png"
+          alt="Выж вылын пыдъёссэ кечат-вамат карыса пукись, кагаз вылэ маке суредась, кечато дэремен пилэн суредэз. Матаз коӵыш нургетыса изе, гурын пис тачыр-тачыр каре."
+          >
+      </picture>
     </div>
   </section>
   <section class="main-margin">

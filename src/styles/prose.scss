@@ -40,13 +40,11 @@
   }
 }
 
-.prose aside {
+.prose aside, .prose blockquote {
   font-style: italic;
-}
-
-.prose blockquote {
-  font-style: italic;
-  padding-left: 3em;
+  padding: 0.2em 1em;
+  border-left: 1px solid currentColor;
+  max-width: 500px;
 }
 
 .prose pre, .prose code {

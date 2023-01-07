@@ -7,7 +7,6 @@ const __INSIGHTS_ID__ = 'bXE8Dvt9ZSOsxSyd';
 module.exports = {
   entry: {
     index: './src/scripts/index.ts',
-    leaves: './src/scripts/leaves.ts',
     toc: './src/scripts/toc.ts',
   },
   mode,
