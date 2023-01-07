@@ -2,7 +2,7 @@
 {% set firstOnLevel = true %}
 {% set lastHeading = null %}
 {% for heading in headings %}
-  {% if lastHeading %}
+  {% if lastHeading != null %}
     {% set d = lastHeading.level - heading.level %}
     {% if d < 0 %}
       <button
@@ -18,7 +18,7 @@
       <ul id="toc-{{ lastHeading.id }}" class="toc__list">
       {% set firstOnLevel = true %}
     {% elif d > 0 %}
-      {% for _ in range(-d) %}
+      {% for _ in range(d) %}
         </li></ul></li>
       {% endfor %}
     {% endif %}
