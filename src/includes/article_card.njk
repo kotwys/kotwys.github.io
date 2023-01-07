@@ -17,6 +17,7 @@
   <img class="article-card__image"
     rel="scm:thumbnailUrl scm:image"
     src="{{ article.data.cover.url | optionalAbsolute(article.url) }}"
+    loading="lazy"
     alt="{{ article.data.cover.alt }}"
     >
 </article>

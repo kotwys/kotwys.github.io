@@ -15,6 +15,7 @@ layout: page.njk
       </p>
       <img class="section-hero__ornament"
         src="/assets/sleepycat.png"
+        loading="lazy"
         srcset="/assets/sleepycat.png 1x, /assets/sleepycat@2x.png 2x">
     </div>
     {% for year, articles in collections.articles | reverse | byYear %}
