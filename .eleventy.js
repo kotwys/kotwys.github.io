@@ -25,8 +25,6 @@ const optionalAbsolute = function (url, base) {
 }
 
 module.exports = (config) => {
-  config.setDataDeepMerge(true);
-
   const dictionary = yaml.load(readFileSync(__dirname + '/src/data/words.yml'));
 
   /** @type {import('markdown-it').Options} */
@@ -189,3 +187,4 @@ module.exports = (config) => {
     templateFormats: ['md', 'njk', '11ty.js'],
   };
 };
+
