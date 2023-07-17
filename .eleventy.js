@@ -112,7 +112,8 @@ module.exports = (config) => {
 
   config.addFilter('optionalAbsolute', optionalAbsolute);
 
-  config.addFilter('headings', content => {
+  config.addFilter('headings', (content, _level) => {
+    const level = _level || 3;
     const document = htmlParse(content);
     return document
       .querySelectorAll('h1, h2, h3, h4, h5, h6')
@@ -120,7 +121,8 @@ module.exports = (config) => {
         id: el.id,
         level: parseInt(el.tagName[1]),
         content: el.textContent,
-      }));
+      }))
+      .filter((heading) => heading.level <= level);
   });
 
   config.addFilter('isoDate', date => date.toISOString());
