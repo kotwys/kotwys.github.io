@@ -47,6 +47,7 @@ const intersected: IntersectionObserverCallback = (entries) => {
       (entry.intersectionRect.x < 270)
   );
 
+  toc.style.pointerEvents = shouldHide ? 'none' : '';
   toc.classList.toggle('toc_hidden', shouldHide);
 };
 
@@ -55,7 +56,8 @@ const io = new IntersectionObserver(intersected, {
 });
 const possibleIntersections = document.querySelectorAll(
   '.prose figure img,' +
-  '.prose table tr'
+  '.prose table tr,' +
+  '.toc-obstacle'
 );
 
 const mql = matchMedia('(min-width: 1120px)');

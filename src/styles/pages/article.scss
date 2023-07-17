@@ -119,7 +119,7 @@
 
 .toc__link_current {
   color: var(--text-primary);
-  cursor: none;
+  cursor: default;
 }
 
 @media (prefers-reduced-motion: no-preference) {
