@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "lib": ["DOM", "ESNext"],
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
     "esModuleInterop": true
   },
   "include": ["src/scripts/**/*.ts"],
