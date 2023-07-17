@@ -20,7 +20,7 @@ lang: udm
 
   {% for article in collections.articles | reverse %}
   <entry xml:base="{{ site.url }}{{ article.url }}">
-    <title>{{ article.data.title }}</title>
+    <title>{{ article.data.title | md(true) | safe }}</title>
     <link href="./." type="text/html"/>
     {% for lang in article.data.otherlangs %}
     <link href="./{{ lang }}" hreflang="{{ lang }}" type="text/html"/>
@@ -28,7 +28,7 @@ lang: udm
     <id>{{ site.url }}{{ article.url }}</id>
     <published>{{ article.data.date | isoDate }}</published>
     {% if article.data.abstract %}
-    <summary>{{ article.data.abstract }}</summary>
+    <summary>{{ article.data.abstract | md(true) | safe }}</summary>
     {% endif %}
     <content type="text/html">
       <![CDATA[

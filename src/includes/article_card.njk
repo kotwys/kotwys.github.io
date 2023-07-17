@@ -2,7 +2,9 @@
   <link rel="scm:creator scm:author" href="https://kotwys.github.io#me">
   <div class="article-card__content">
     <h4 class="article-card__heading" property="scm:headline scm:name">
-      <a class="article-card__link hollow-link" href="{{ article.url }}">{{ article.data.title }}</a>
+      <a class="article-card__link hollow-link" href="{{ article.url }}">
+        {{ article.data.title | md(true) | safe }}
+      </a>
     </h4>
     <p class="article-card__meta">
       <time

@@ -33,7 +33,7 @@ eleventyComputed:
         <h1
           class="article-hero__heading"
           property="scm:headline scm:name">
-          {{ title }}
+          {{ title | md(true) | safe }}
         </h1>
         {% if abstract %}
         <p property="scm:abstract">{{ abstract | md(true) | safe }}</p>
