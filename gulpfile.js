@@ -15,7 +15,6 @@ const transformStyles = (stream) => stream
     require('autoprefixer'),
   ]))
   .pipe(cleanCSS({ level: 2 }))
-  .pipe(dest('dist/styles'));
 
 const STYLES_ENTRY_POINTS = [
   'src/styles/main.scss',
@@ -27,14 +26,16 @@ const STYLES_ENTRY_POINTS = [
 
 const styles = series(
   ...STYLES_ENTRY_POINTS.map(
-    (path) => () => transformStyles(src(path))
-  )
+    (path) => () => transformStyles(src(path)).pipe(dest('dist/styles'))
+  ),
+  () => transformStyles(src('src/articles/**/*.scss'))
+    .pipe(dest('dist/articles/')),
 );
 
 exports.styles = styles;
 
 exports.watchStyles = () => {
-  watch('src/styles/**/*.scss', {
+  watch('src/(articles|styles)/**/*.scss', {
     ignoreInitial: false,
   }, styles);
 };

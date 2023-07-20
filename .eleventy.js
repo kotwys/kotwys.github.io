@@ -3,7 +3,7 @@ const yaml = require('js-yaml');
 const { URL } = require('url');
 const htmlmin = require('html-minifier');
 const xmlmin = require('minify-xml');
-const { parse: htmlParse } = require('node-html-parser');
+const { parse: htmlParse, HTMLElement } = require('node-html-parser');
 const readingTime = require('reading-time');
 const escapeHtml = require('escape-html');
 
@@ -55,7 +55,10 @@ module.exports = (config) => {
   config.addPassthroughCopy('src/assets');
   config.addPassthroughCopy('src/fonts');
   config.addPassthroughCopy('src/sw.js');
-  config.addPassthroughCopy('src/**/*.(html|png|jpg)');
+  config.addPassthroughCopy('src/**/*.(html|png|jpg|js)');
+
+  config.ignores.add('src/styles');
+  config.ignores.add('src/scripts');
 
   config.addCollection('articles', api =>
     api.getFilteredByGlob('src/articles/**/index.md')
@@ -123,6 +126,14 @@ module.exports = (config) => {
         content: el.textContent,
       }))
       .filter((heading) => heading.level <= level);
+  });
+
+  config.addFilter('excludeJsSpecific', (content) => {
+    const document = htmlParse(content);
+    document.querySelectorAll('.init').forEach((node) =>
+      node.remove()
+    );
+    return document.toString();
   });
 
   config.addFilter('isoDate', date => date.toISOString());

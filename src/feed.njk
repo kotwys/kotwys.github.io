@@ -32,7 +32,7 @@ lang: udm
     {% endif %}
     <content type="text/html">
       <![CDATA[
-        <div>{{ article.templateContent | safe }}</div>
+        <div>{{ article.templateContent | excludeJsSpecific | safe }}</div>
       ]]>
     </content>
   </entry>
