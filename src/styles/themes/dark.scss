@@ -1,12 +1,13 @@
 body, .theme-reset {
-  --color-accent: #c05358;
-  --color-background: #0e0d0d;
+  --color-accent: #dc6368;
+  --color-background: #1f1010;
   --text-primary: #f3f1f1;
   --text-minor: #706267;
-  --elevate: rgba(0, 0, 0, 0.1);
+  --elevate: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.3);
   --code-block: #1a1818;
   color: var(--text-primary);
-  background: #0e0d0d;
+  background: #1f1010;
 }
 
 .theme-hero {
@@ -15,5 +16,6 @@ body, .theme-reset {
   --color-accent: #c05358;
   --text-primary: #dfbfc4;
   --text-minor: #817577;
+  --elevate: rgba(0, 0, 0, 0.1);
   color: var(--text-primary);
 }
