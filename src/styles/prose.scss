@@ -3,6 +3,7 @@
   aside, blockquote, details, hr, h1, h2, h3, h4, h5, h6, p, ol, ul
 ) {
   width: 720px;
+  box-sizing: border-box;
   margin-inline: auto;
 
   @media (max-width: 752px) {
@@ -22,7 +23,18 @@
   border-bottom: 1px solid currentColor;
 }
 
-.prose abbr[title], .prose [data-word] {
+.prose .footnote-ref {
+  break-before: avoid;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+
+  a {
+    border: none;
+  }
+}
+
+.prose :is(span[title], abbr[title], [data-word]) {
   text-decoration: none;
   border-bottom: 1px dotted currentColor;
 }
@@ -47,6 +59,10 @@
   max-width: 500px;
 }
 
+span[lang="ja"], i[lang="ja"] {
+  font-style: normal;
+}
+
 .prose pre, .prose code {
   background-color: var(--code-block);
   border-radius: 4px;
@@ -58,10 +74,28 @@
 
 .prose pre {
   padding: 16px;
-  overflow-x: scroll;
+  overflow-x: auto;
   > code {
     padding: 0;
   }
+}
+
+.prose table {
+  border-collapse: collapse;
+
+  thead {
+    break-inside: avoid;
+  }
+
+  &, th, td {
+    border: 1px solid var(--color-border);
+    padding: 0.2em 0.5em;
+  }
+}
+
+.prose .columns {
+    margin-inline: auto;
+    overflow-x: auto;
 }
 
 .prose-wide pre {
@@ -115,4 +149,29 @@
   .prose-wide .float-left {
     margin-left: calc(30vw - 360px);
   }
+}
+
+.prose details {
+  background-color: var(--elevate);
+  padding: 0.5em 1em;
+  margin-block: 0.5em;
+  border-radius: 2px;
+  box-sizing: content-box;
+
+  summary {
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  ::marker {
+    color: var(--color-accent);
+  }
+}
+
+.prose .katex .textrm {
+  font-family:
+    Piazzolla,
+    'Noto Serif',
+    'Noto Serif CJK JP', 'Noto Serif CJK', 'Mincho',
+    'Georgia', 'Times New Roman', 'Times', serif;
 }
