@@ -9,7 +9,7 @@ lang: udm
   xml:lang="{{ lang }}"
   >
   <title>{{ title }}</title>
-  <link href="/articles"/>
+  <link rel="alternate" href="/articles"/>
   <link rel="self" href="/feed.xml" type="application/atom+xml"/>
   <author>
     <name>{{ site.author }}</name>
@@ -21,9 +21,9 @@ lang: udm
   {% for article in collections.articles | reverse %}
   <entry xml:base="{{ site.url }}{{ article.url }}">
     <title>{{ article.data.title | md(true) | safe }}</title>
-    <link href="./." type="text/html"/>
+    <link rel="alternate" href="./." type="text/html"/>
     {% for lang in article.data.otherlangs %}
-    <link href="./{{ lang }}" hreflang="{{ lang }}" type="text/html"/>
+    <link rel="alternate" href="./{{ lang }}" hreflang="{{ lang }}" type="text/html"/>
     {% endfor %}
     <id>{{ site.url }}{{ article.url }}</id>
     <published>{{ article.data.date | isoDate }}</published>
