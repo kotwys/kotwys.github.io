@@ -16,6 +16,9 @@
 - initial: могӟонтэмлык
   date: 2021
   def: доступность (accessibility)
+- initial: тямысо
+  date: 2020
+  def: байт (8 бит)
 - initial: валэктон
   def: спецификация
 - initial: вачекуспаськись
@@ -24,6 +27,17 @@
   def: "татын: тег"
 - initial: покчипус
   def: иконка
+- initial: ӟалкым
+  link: http://udmcorpus.udman.ru/dictionary
+  def: влияние
+- initial: шаратэм
+  link: http://udmcorpus.udman.ru/dictionary
+  def: глухой (согласный)
+- initial: ньыл-ньыл
+  link: http://udmcorpus.udman.ru/dictionary
+  def: плавный (согласный)
+- initial: нимкылӧри
+  def: Терминологическая коммиссия
 
 # Culture
 - initial: Нипоншаер

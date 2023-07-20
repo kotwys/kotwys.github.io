@@ -36,6 +36,10 @@ body {
   fill: currentColor;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .nav ul {
   @include reset.ul;
 }
