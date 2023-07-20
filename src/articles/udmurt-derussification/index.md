@@ -196,8 +196,8 @@ class="nowrap">/дь/</span> но <span data-latin-skip class="nowrap">/ть/</s
 <img
   alt="Инъетась латӥн гожпусъёс Basic Latin люкетэ пыро.  Ö гожпус Latin-1 Supplement люкетэ пыре.  Акут но гачек понэм пусъёс (Ǵ но Ḱ сяна) Latin Extended-A люкетэ пыро.  Ǵ но Ḱ гожпусъёс Latin Extended-B люкетэ пыро."
   src="./unicode-chart.png"/>
-<figcaption>Кудӥз гожпусъёс <span data-latin="Unicode">Юнӥкод</span>лэн кудаз
-люкетаз пыро</figcaption>
+<figcaption>Кудӥз гожпус <span data-latin="Unicode">Юнӥкод</span>лэн кудаз
+люкетаз пыре</figcaption>
 </figure>
 
 Тросэз гожпусъёс <span data-latin="Unicode">Юнӥкод</span>лэн Basic Latin я
