@@ -53,7 +53,7 @@ export function drawer(el: HTMLElement) {
       : 'Менюез усьтоно';
     icon.setAttribute(
       'href',
-      `/assets/icons/sprite.svg#${newState ? 'close-line' : 'menu-3-line'}`
+      `/assets/icons/sprite.svg#${newState ? 'close-line' : 'menu-2-line'}`
     );
     
     content.classList.toggle('header-drawer__content_active', newState);

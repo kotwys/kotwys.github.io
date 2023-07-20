@@ -45,7 +45,8 @@ exports.icons = () => src('node_modules/remixicon/**/*.svg')
     'github-line',
     'send-plane-2-line',
     'mastodon-line',
-    'menu-3-line',
+    'menu-2-line',
+    'settings-line',
     'close-line',
     'arrow-down-s-line'
   ].includes(f.stem)))

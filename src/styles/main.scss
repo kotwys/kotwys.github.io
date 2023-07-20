@@ -92,10 +92,13 @@ body {
   @include reset.button;
   position: absolute;
   top: 0;
-  right: 0;
   font-size: 0;
   padding: 16px;
   cursor: pointer;
+}
+
+.header-drawer__button {
+  left: 0;
 }
 
 .header__logo {
