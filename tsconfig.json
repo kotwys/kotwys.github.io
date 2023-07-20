@@ -3,8 +3,7 @@
     "lib": ["DOM", "ESNext"],
     "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "node",
-    "esModuleInterop": true
+    "moduleResolution": "node"
   },
   "include": ["src/scripts/**/*.ts"],
   "exclude": ["node_modules"]

@@ -52,7 +52,7 @@ eleventyComputed:
   {% include 'footer.njk' %}
   <script type="module" src="{{ '/scripts/index.js' | url }}"></script>
   {% for script in scripts %}
-  <script src="{{ script | url }}"></script>
+  <script type="module" src="{{ script | url }}"></script>
   {% endfor %}
 </body>
 </html>
