@@ -20,6 +20,9 @@ eleventyComputed:
   {% if rdf.og.description %}
   <meta name="description" content="{{ rdf.og.description }}">
   {% endif %}
+  {% if keywords %}
+  <meta name="keywords" content="{{ keywords }}">
+  {% endif %}
   {% mkRdf rdf %}
   <link rel="alternate"
     href="{{ '/feed.xml' | url }}"
