@@ -38,7 +38,7 @@ eleventyComputed:
   {% if features and 'math' in features %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.19/dist/katex.min.css">
   {% endif %}
-  {% for network in ['Twitter', 'Mastodon'] %}
+  {% for network in ['Twitter', 'Mastodon', 'GitHub'] %}
   <link rel="me" href="{{ site.contacts[network].url }}">
   {% endfor %}
   <link rel="webmention" href="https://webmention.io/kotwys.github.io/webmention" />
