@@ -312,8 +312,7 @@ pudojez voź vyle tuž vaź potto, soku jegit murtjosly skalen jyrin ug luy na-a
 <div class="init prose-wide">
 
 Кыӵе ке тэкстлэсь та латӥнлыкен туссэ эскеремды потэ ке, танӥ аутоматӥк
-берыктонэз лэсьтыны тыршиськем.  Эсэпрадъёсыз туж огшорыесь, соин шекъёсыз
-луыло.  (Вужгес вотэсучконъёсын уз ужа, дыр.)
+берыктонэз лэсьтыны тыршиськем.  (Вужгес вотэсучконъёсын уз ужа, дыр.)
 
 <div class="translator toc-obstacle">
   <div class="translator__input">

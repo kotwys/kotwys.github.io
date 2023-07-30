@@ -2,14 +2,16 @@ const WASM_URL = '/assets/tr.wasm';
 
 interface Exports {
   memory: WebAssembly.Memory;
-  reset_memory(): void;
+  init();
   malloc(size: number): number;
   free(ptr: number);
-  translate(input: number, output: number): number;
+  translate(input: number, inputLength: number, outputPtr: number): number;
+  unref_u32(ptr: number): number;
   [key: string]: WebAssembly.ExportValue;
 }
 
 let instance = null, te = null, td = null;
+let ptrPtrOut = 0;
 export async function init() {
   if (instance != null)
     return Promise.resolve();
@@ -17,23 +19,30 @@ export async function init() {
   ({ instance } = await WebAssembly.instantiateStreaming(fetch(WASM_URL)));
   te = new TextEncoder();
   td = new TextDecoder();
+  (instance.exports as Exports).init();
+  ptrPtrOut = (instance.exports as Exports).malloc(4);
 }
 
 export function translate(s: string) {
+  if (s.length == 0)
+    return "";
+
   const exports = instance.exports as Exports;
-  exports.reset_memory();
-  const buf = te.encode(s + '\0');
-  const cInput = exports.malloc(buf.length);
+  const buf = te.encode(s);
+  const ptrIn = exports.malloc(buf.length);
   new Uint8Array(
     exports.memory.buffer,
-    cInput, buf.length
+    ptrIn, buf.length
   ).set(buf);
-  const cOutput = exports.malloc(buf.length*2-1);
-  const size = exports.translate(cInput, cOutput);
-  return td.decode(new Uint8Array(
+  const length = exports.translate(ptrIn, buf.length, ptrPtrOut);
+  const ptrOut = exports.unref_u32(ptrPtrOut);
+  const res = td.decode(new Uint8Array(
     exports.memory.buffer,
-    cOutput, size
+    ptrOut, length,
   ));
+  exports.free(ptrIn);
+  exports.free(ptrOut);
+  return res;
 }
 
 export function translateContent(el: Element) {
