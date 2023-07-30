@@ -35,6 +35,10 @@ module.exports = (config) => {
     .use(require('markdown-it-anchor'))
     .use(require('markdown-it-texmath'), {
       engine: require('katex'),
+      katexOptions: {
+        strict: 'ignore',
+        trust: true,
+      },
     })
     .use(require('markdown-it-footnote'))
     .use(require('./utils/word-parser'), {

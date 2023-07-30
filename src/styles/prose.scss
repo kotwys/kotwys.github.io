@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .prose-wide >
 :is(
   aside, blockquote, details, hr, h1, h2, h3, h4, h5, h6, p, ol, ul
@@ -168,10 +170,22 @@ span[lang="ja"], i[lang="ja"] {
   }
 }
 
+.prose .katex-display {
+    overflow-x: auto;
+}
+
+.prose-wide .katex-display > .katex > .katex-html {
+    padding-inline: 4em;
+    margin-inline: auto;
+    width: min-content;
+}
+
 .prose .katex .textrm {
   font-family:
     Piazzolla,
     'Noto Serif',
     'Noto Serif CJK JP', 'Noto Serif CJK', 'Mincho',
     'Georgia', 'Times New Roman', 'Times', serif;
+  /* Math is 1.21 em */
+  font-size: 1em*math.pow(1.1, -2);
 }
